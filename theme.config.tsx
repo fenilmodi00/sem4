@@ -7,7 +7,7 @@ import { useConfig } from 'nextra-theme-docs'
 
 
 const config: DocsThemeConfig = {
-  logo: <span>Fenil Modi</span>,
+  logo: <span>Fenil Modi </span>,
   project: {
     link: 'https://github.com/fenilmodi00/sem4',
   },
