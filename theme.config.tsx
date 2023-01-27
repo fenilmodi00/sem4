@@ -9,7 +9,7 @@ import { useConfig } from 'nextra-theme-docs'
 const config: DocsThemeConfig = {
   logo: <span>Fenil Modi</span>,
   project: {
-    link: 'https://github.com/fenilmodi00/sem4_1',
+    link: 'https://github.com/fenilmodi00/sem4',
   },
   chat: {
     link: 'https://api.whatsapp.com/send/?phone=917984630511&text&type=phone_number&app_absent=0',
@@ -17,7 +17,7 @@ const config: DocsThemeConfig = {
   },
 
   
-  docsRepositoryBase: 'https://github.com/fenilmodi00/sem4_1',
+  docsRepositoryBase: 'https://github.com/fenilmodi00/sem4',
 
   faviconGlyph : '🫠',
 
