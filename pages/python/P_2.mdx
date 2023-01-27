@@ -1,0 +1,126 @@
+# Practical_2 😶‍🌫️
+
+### 1 Write a python program to print “Welcome to UVPCE”.
+```py filename="P2_1.py"   copy
+print("Welcome to UVPCE")
+```
+
+### 2 Write a python program which takes student information such as Name, Enrollment Number, Branch, Age, Email and Mobile number from user and print
+```py filename="P2_2.py"   copy
+name = input("Enter student name: ")
+enrollment = input("Enter student enrollment number: ")
+branch = input("Enter student branch: ")
+age = input("Enter student age: ")
+email = input("Enter student email: ")
+mobile = input("Enter student mobile number: ")
+
+print("\nStudent Information: ")
+print("Name: ", name)
+print("Enrollment Number: ", enrollment)
+print("Branch: ", branch)
+print("Age: ", age)
+print("Email: ", email)
+print("Mobile Number: ", mobile)
+```
+
+### 3 Write python programs to evaluate the following expressions to demonstrate the use of operator precedence and associativity.
+
+```py filename="P2_3.py"   copy
+# Using parentheses to enforce a specific order of operations
+result = (12 + 3) - (4 / 2) < (3 + 1)
+print(result)
+
+x = (10 * 2) % 2 << 4
+x += 1
+print(x)
+```
+
+### 4 Write a python program to display data types of different variables. 
+```py filename="P2_4.py"   copy
+# Declare variables with different data types
+a = 10
+b = 3.14
+c = "Hello"
+d = [1, 2, 3]
+e = (4, 5, 6)
+f = {7: "seven", 8: "eight"}
+g = True
+
+# Display the data types of the variables
+print(type(a))  # int
+print(type(b))  # float
+print(type(c))  # str
+print(type(d))  # list
+print(type(e))  # tuple
+print(type(f))  # dict
+print(type(g))  # bool
+```
+### 5 Write a python program to check given character is a vowel or not.
+```py filename="P2_5.py"   copy
+# Get input from user
+ch = input("Enter a character: ")
+
+# Check if the character is a vowel
+if ch in ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U']:
+    print(ch, "is a vowel.")
+else:
+    print(ch, "is not a vowel.")
+```
+
+### 6 Write a python program to for library charges a fine for books returned late. Following are the fines: 
+#### First five days: 40 paisa per day.
+#### Six to ten day: 65 paisa per day.
+#### Above ten days: 80 paisa per day
+```py filename="P2_6.py"   copy
+# Get number of days late
+days_late = int(input("Enter number of days late: "))
+
+# Initialize fine to 0
+fine = 0
+
+if days_late > 0:
+    if days_late <= 5:
+        fine = days_late * 0.40
+    elif days_late <= 10:
+        fine = (5 * 0.40) + ((days_late - 5) * 0.65)
+    else:
+        fine = (5 * 0.40) + (5 * 0.65) + ((days_late - 10) * 0.80)
+    print("Fine: Rs.", fine)
+else:
+    print("No fine")
+
+```
+
+### 7 Write a python program to count odd numbers from given three numbers and display maximum odd number.
+```py filename="P2_7.py"   copy
+# Get input from user
+num1 = int(input("Enter first number: "))
+num2 = int(input("Enter second number: "))
+num3 = int(input("Enter third number: "))
+
+# Initialize count and max_odd to 0
+count = 0
+max_odd = 0
+
+# Check if first number is odd
+if num1 % 2 != 0:
+    count += 1
+    max_odd = num1
+
+# Check if second number is odd
+if num2 % 2 != 0:
+    count += 1
+    if num2 > max_odd:
+        max_odd = num2
+
+# Check if third number is odd
+if num3 % 2 != 0:
+    count += 1
+    if num3 > max_odd:
+        max_odd = num3
+
+# Display the count and maximum odd number
+print("Count of odd numbers:", count)
+print("Maximum odd number:", max_odd)
+```
+

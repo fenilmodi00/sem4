@@ -1,0 +1,213 @@
+# Practical_8 😶‍🌫️
+
+### Develop an application for text editor using file handling concepts. Application should be able to create, edit the existing and save the text documents.
+
+```java copy
+using System;
+using System.IO;
+using System.Windows.Forms;
+
+public class TextEditor : Form
+{
+    private TextBox textBox;
+    private OpenFileDialog openFileDialog;
+    private SaveFileDialog saveFileDialog;
+
+    public TextEditor()
+    {
+        // Initialize text box
+        textBox = new TextBox();
+        textBox.Dock = DockStyle.Fill;
+        textBox.Multiline = true;
+
+        // Initialize open file dialog
+        openFileDialog = new OpenFileDialog();
+        openFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+
+        // Initialize save file dialog
+        saveFileDialog = new SaveFileDialog();
+        saveFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+
+        // Add controls to form
+        this.Controls.Add(textBox);
+        this.Text = "Text Editor";
+        this.Menu = new MainMenu();
+
+        // Add "File" menu
+        MenuItem fileMenu = new MenuItem("File");
+        this.Menu.MenuItems.Add(fileMenu);
+
+        // Add "Open" menu item
+        MenuItem openMenuItem = new MenuItem("Open");
+        openMenuItem.Click += OpenMenuItem_Click;
+        fileMenu.MenuItems.Add(openMenuItem);
+
+        // Add "Save" menu item
+        MenuItem saveMenuItem = new MenuItem("Save");
+        saveMenuItem.Click += SaveMenuItem_Click;
+        fileMenu.MenuItems.Add(saveMenuItem);
+
+        // Add "Save As" menu item
+        MenuItem saveAsMenuItem = new MenuItem("Save As...");
+        saveAsMenuItem.Click += SaveAsMenuItem_Click;
+        fileMenu.MenuItems.Add(saveAsMenuItem);
+    }
+
+    private void OpenMenuItem_Click(object sender, EventArgs e)
+    {
+        if (openFileDialog.ShowDialog() == DialogResult.OK)
+        {
+            // Read file and set text box text
+            textBox.Text = File.ReadAllText(openFileDialog.FileName);
+        }
+    }
+
+    private void SaveMenuItem_Click(object sender, EventArgs e)
+    {
+        // If file has not been saved before, show "Save As" dialog
+        if (saveFileDialog.FileName == "")
+        {
+            SaveAsMenuItem_Click(sender, e);
+        }
+        else
+        {
+            // Save text box text to file
+            File.WriteAllText(saveFileDialog.FileName, textBox.Text);
+        }
+    }
+
+    private void SaveAsMenuItem_Click(object sender, EventArgs e)
+    {
+        if (saveFileDialog.ShowDialog() == DialogResult.OK)
+        {
+            // Save text box text to file
+            File.WriteAllText(saveFileDialog.FileName, textBox.Text);
+        }
+    }
+
+    [STAThread]
+    public static void Main()
+    {
+        Application.Run(new TextEditor());
+    }
+}
+```
+
+#### or Try this one
+
+```java copy
+using System;
+using System.IO;
+using System.Windows.Forms;
+
+public class TextEditor : Form
+{
+    private TextBox textBox;
+    private MenuStrip menuStrip;
+    private ToolStripMenuItem fileMenu;
+    private ToolStripMenuItem newMenuItem;
+    private ToolStripMenuItem openMenuItem;
+    private ToolStripMenuItem saveMenuItem;
+    private ToolStripMenuItem saveAsMenuItem;
+    private ToolStripMenuItem exitMenuItem;
+
+    private string currentFilePath;
+
+    public TextEditor()
+    {
+        // Initialize textbox
+        textBox = new TextBox();
+        textBox.Dock = DockStyle.Fill;
+        textBox.Multiline = true;
+
+        // Initialize menu strip
+        menuStrip = new MenuStrip();
+
+        // Initialize file menu and items
+        fileMenu = new ToolStripMenuItem("File");
+        newMenuItem = new ToolStripMenuItem("New");
+        openMenuItem = new ToolStripMenuItem("Open");
+        saveMenuItem = new ToolStripMenuItem("Save");
+        saveAsMenuItem = new ToolStripMenuItem("Save As...");
+        exitMenuItem = new ToolStripMenuItem("Exit");
+
+        // Add items to file menu
+        fileMenu.DropDownItems.Add(newMenuItem);
+        fileMenu.DropDownItems.Add(openMenuItem);
+        fileMenu.DropDownItems.Add(saveMenuItem);
+        fileMenu.DropDownItems.Add(saveAsMenuItem);
+        fileMenu.DropDownItems.Add(new ToolStripSeparator());
+        fileMenu.DropDownItems.Add(exitMenuItem);
+
+        // Add file menu to menu strip
+        menuStrip.Items.Add(fileMenu);
+
+        // Add event handlers for menu items
+        newMenuItem.Click += new EventHandler(NewMenuItem_Click);
+        openMenuItem.Click += new EventHandler(OpenMenuItem_Click);
+        saveMenuItem.Click += new EventHandler(SaveMenuItem_Click);
+        saveAsMenuItem.Click += new EventHandler(SaveAsMenuItem_Click);
+        exitMenuItem.Click += new EventHandler(ExitMenuItem_Click);
+
+        // Add controls to form
+        this.Controls.Add(textBox);
+        this.Controls.Add(menuStrip);
+        this.MainMenuStrip = menuStrip;
+    }
+
+    private void NewMenuItem_Click(object sender, EventArgs e)
+    {
+        // Clear textbox and reset current file path
+        textBox.Clear();
+        currentFilePath = null;
+    }
+
+    private void OpenMenuItem_Click(object sender, EventArgs e)
+    {
+        OpenFileDialog openFileDialog = new OpenFileDialog();
+        openFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+
+        if (openFileDialog.ShowDialog() == DialogResult.OK)
+        {
+            // Read file contents and add to textbox
+            textBox.Text = File.ReadAllText(openFileDialog.FileName);
+            currentFilePath = openFileDialog.FileName;
+            private void SaveMenuItem_Click(object sender, EventArgs e)
+{
+if (currentFilePath == null)
+{
+SaveFileDialog saveFileDialog = new SaveFileDialog();
+saveFileDialog.Filter = "Text Files (.txt)|.txt|All Files (.)|.";
+        if (saveFileDialog.ShowDialog() == DialogResult.OK)
+        {
+            currentFilePath = saveFileDialog.FileName;
+        }
+        else
+        {
+            return;
+        }
+    }
+
+    File.WriteAllText(currentFilePath, textBox.Text);
+}
+
+private void SaveAsMenuItem_Click(object sender, EventArgs e)
+{
+    SaveFileDialog saveFileDialog = new SaveFileDialog();
+    saveFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+
+    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+    {
+        currentFilePath = saveFileDialog.FileName;
+        File.WriteAllText(currentFilePath, textBox.Text);
+    }
+}
+
+ private void ExitMenuItem_Click(object sender, EventArgs e)
+{
+    Application.Exit();
+ }
+}
+```
+
+##### might be wrong 😟

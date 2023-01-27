@@ -1,0 +1,221 @@
+# Practical_5 😶‍🌫️
+
+#### 1 Write a shell script which accepts a number and displays the list of odd numbers below that number. It should also display the sum of all this odd numbers.
+
+```bash copy
+#!/bin/bash
+
+# Accept a number as input
+echo "Enter a number:"
+read num
+
+# Initialize a variable to store the sum
+sum=0
+
+# Iterate through all numbers below the input number
+for i in $(seq 1 $((num-1))); do
+  # Check if the current number is odd
+  if [ $((i % 2)) -ne 0 ]; then
+    # Print the current number
+    echo $i
+    # Add the current number to the sum
+    sum=$((sum+i))
+  fi
+done
+
+# Print the sum of all odd numbers
+echo "Sum of all odd numbers below $num: $sum"
+```
+
+#### 2 Write a shell script to arrange numbers in ascending or descending order as per the user choice.
+
+```bash copy
+#!/bin/bash
+
+# Accept numbers as input
+echo "Enter numbers separated by spaces:"
+read -a numbers
+
+# Ask the user for their sort order preference
+echo "Enter 1 for ascending order or 2 for descending order:"
+read order
+
+if [ $order -eq 1 ]; then
+  # Sort the numbers in ascending order
+  sorted=($(printf "%s\n" "${numbers[@]}" | sort -n))
+  echo "Ascending order: ${sorted[*]}"
+elif [ $order -eq 2 ]; then
+  # Sort the numbers in descending order
+  sorted=($(printf "%s\n" "${numbers[@]}" | sort -nr))
+  echo "Descending order: ${sorted[*]}"
+else
+  echo "Invalid choice. Please enter 1 for ascending or 2 for descending."
+fi
+
+```
+
+#### 3 Write a shell script to check whether the entered number is Armstrong or not
+
+```bash copy
+#!/bin/bash
+
+# Accept a number as input
+echo "Enter a number:"
+read num
+# Initialize a variable to store the sum
+sum=0
+# Store the number of digits in the input number
+num_digits=${#num}
+# Iterate through each digit in the input number
+for digit in $(echo $num | grep -o .);
+do
+  # Add the digit raised to the power of the number of digits to the sum
+  sum=$((sum + 10#$digit**num_digits))
+done
+# Check if the sum is equal to the input number
+if [ $sum -eq $num ]; then
+  echo "$num is an Armstrong number."
+else
+  echo "$num is not an Armstrong number."
+fi
+
+```
+
+#### 4 Size of array A is 10 while size of B is 30. Scan 10 integers in both the array and concat array A to B. Then apply sorting algorithm according to the user choice
+
+```bash copy
+#!/bin/bash
+
+# Declare and initialize arrays A and B
+A=()
+B=()
+
+# Get input for array A
+echo "Enter 10 integers for array A:"
+for i in {1..10}; do
+  read input
+  A+=($input)
+done
+
+# Get input for array B
+echo "Enter 30 integers for array B:"
+for i in {1..30}; do
+  read input
+  B+=($input)
+done
+
+# Concatenate array A to array B
+C=( "${A[@]}" "${B[@]}" )
+
+# Ask the user for their sort order preference
+echo "Enter 1 for ascending order or 2 for descending order:"
+read order
+
+if [ $order -eq 1 ]; then
+  # Sort the numbers in ascending order
+  sorted=($(printf "%s\n" "${C[@]}" | sort -n))
+  echo "Ascending order: ${sorted[*]}"
+elif [ $order -eq 2 ]; then
+  # Sort the numbers in descending order
+  sorted=($(printf "%s\n" "${C[@]}" | sort -nr))
+  echo "Descending order: ${sorted[*]}"
+else
+  echo "Invalid choice. Please enter 1 for ascending or 2 for descending."
+fi
+
+```
+
+#### 5 Write a shell script to remove duplicates values from an array.
+
+```bash copy
+#!/bin/bash
+
+# Declare and initialize an array
+arr=()
+
+# Get input for the array
+echo "Enter values for the array separated by spaces:"
+read -a arr
+
+# Convert the array to a string and remove duplicate values
+arr=($(echo "${arr[@]}" | tr ' ' '\n' | sort -u | tr '\n' ' '))
+
+# Print the array with duplicate values removed
+echo "Array with duplicates removed: ${arr[*]}"
+
+```
+
+#### 6 Write a shell script to add two arrays.
+
+```bash copy
+#!/bin/bash
+
+# Declare and initialize two arrays
+array1=()
+array2=()
+
+# Get input for array1
+echo "Enter values for array1 separated by spaces:"
+read -a array1
+
+# Get input for array2
+echo "Enter values for array2 separated by spaces:"
+read -a array2
+
+# Add two arrays
+result=("${array1[@]}" "${array2[@]}")
+
+# Print the resulting array
+echo "Resulting array: ${result[*]}"
+
+```
+
+#### 7 . Write a shell script to reverse an array.
+
+```bash copy
+#!/bin/bash
+
+# Declare and initialize an array
+arr=("h" "e" "l" "l" "o")
+
+# Find the length of the array
+len=${#arr[@]}
+
+# Initialize a new array to store the reversed values
+result=()
+
+# Iterate through the array in reverse order
+for (( i = $len - 1; i >= 0; i-- )); do
+  result+=("${arr[i]}")
+done
+
+# Print the reversed array
+echo "Reversed array: ${result[*]}"
+
+```
+
+#### 10 Write a shell script to count number of uppercase words in a string.
+
+```bash copy
+#!/bin/bash
+
+# Accept a string as input
+echo "Enter a string:"
+read str
+
+# Initialize a variable to store the count
+count=0
+
+# Iterate through each word in the string
+for word in $str; do
+  # Check if the word is uppercase
+  if [[ "$word" == "${word^^}" ]]; then
+    # If it is, increment the count
+    count=$((count+1))
+  fi
+done
+
+# Print the count
+echo "Number of uppercase words in the string: $count"
+
+```

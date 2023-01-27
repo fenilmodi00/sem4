@@ -1,0 +1,269 @@
+# Practical_2 😶‍🌫️
+
+### 1 Write a program to get integer, double, character and string values from the user and display it on the screen.
+
+```c# filename="P2_1.C#"   copy
+using System;
+
+namespace P1_1
+{   internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("21012021052");
+            int A;
+            double B;
+            char c;
+            string d;
+
+            Console.WriteLine("enter A value in intger");
+            A = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("enter A value in double");
+            B = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("enter c value in charecter");
+            c = Convert.ToChar(Console.ReadLine());
+            Console.WriteLine("enter d value in string");
+            d = Convert.ToString(Console.ReadLine());
+
+            Console.WriteLine(A);
+            Console.WriteLine(B);
+            Console.WriteLine(c);
+            Console.WriteLine(d);
+            Console.ReadKey();
+        }
+    }
+}
+```
+
+### 2 Write a program to check whether the entered value is numeric or not. [Note: use try and catch.]
+
+```c# filename="P2_2.C#"   copy
+using System;
+
+class p1_2
+{
+    static void Main(string[] args)
+    {
+        string input;
+
+        Console.Write("Enter a value: ");
+        input = Console.ReadLine();
+
+        try
+        {
+            double num = double.Parse(input);
+            Console.WriteLine(input + " is a numeric value.");
+        }
+        catch (FormatException)
+        {
+            Console.WriteLine(input + " is not a numeric value.");
+        }
+    }
+}
+```
+
+### 3 Write a program to accept a number from the user and throw an exception if the number is not an even number
+
+```c# filename="P2_3.C#"   copy
+using System;
+
+class p1_3
+{
+    static void Main(string[] args)
+    {
+        int num;
+
+        Console.Write("Enter a number: ");
+        num = int.Parse(Console.ReadLine());
+
+        if (num % 2 != 0)
+        {
+            throw new Exception("The number is not an even number.");
+        }
+        else
+        {
+            Console.WriteLine("The number is an even number.");
+        }
+    }
+}
+```
+
+### 4 Write a program to find whether the given year is leap year or not. (Leap year is evenly divisible by 4, but if it is evenly divisible by 100 then it is not a leap year, but if it is evenly divisible by 400, then it is a leap year)
+
+```c# filename="P2_4.C#"   copy
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        int year;
+
+        Console.Write("Enter a year: ");
+        year = int.Parse(Console.ReadLine());
+
+        if (year % 4 == 0)
+        {
+            if (year % 100 == 0)
+            {
+                if (year % 400 == 0)
+                    Console.WriteLine(year + " is a leap year.");
+                else
+                    Console.WriteLine(year + " is not a leap year.");
+            }
+            else
+                Console.WriteLine(year + " is a leap year.");
+        }
+        else
+            Console.WriteLine(year + " is not a leap year.");
+    }
+}
+```
+
+### 5 Write a program to check whether the given number is perfect or not. A number is perfect if the sum of its divisor is the same as the number itself
+
+```c# filename="P2_5.C#"   copy
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        int num;
+        int sum = 0;
+
+        Console.Write("Enter a number: ");
+        num = int.Parse(Console.ReadLine());
+
+        for (int i = 1; i <= num/2; i++)
+        {
+            if (num % i == 0)
+            {
+                sum += i;
+            }
+        }
+
+        if (sum == num)
+        {
+            Console.WriteLine(num + " is a perfect number.");
+        }
+        else
+        {
+            Console.WriteLine(num + " is not a perfect number.");
+        }
+    }
+}
+```
+
+### 6 Write a program to check whether the given number is lucky or not
+
+```c# filename="P2_6.C#"   copy
+using System;
+
+class Program
+{
+    static bool isPrime(int num)
+    {
+        if (num <= 1) return false;
+        if (num == 2) return true;
+        if (num % 2 == 0) return false;
+
+        var boundary = (int)Math.Floor(Math.Sqrt(num));
+
+        for (int i = 3; i <= boundary; i += 2)
+        {
+            if (num % i == 0) return false;
+        }
+
+        return true;
+    }
+    static int digitSum(int num)
+    {
+        int sum = 0;
+        while (num > 0)
+        {
+            sum += num % 10;
+            num /= 10;
+        }
+        return sum;
+    }
+
+    static void Main(string[] args)
+    {
+        int num;
+
+        Console.Write("Enter a number: ");
+        num = int.Parse(Console.ReadLine());
+
+        if (isPrime(num) && isPrime(digitSum(num)))
+        {
+            Console.WriteLine(num + " is a lucky number.");
+        }
+        else
+        {
+            Console.WriteLine(num + " is not a lucky number.");
+        }
+    }
+}
+```
+
+### 7 Write a program to generate Floyd's Triangle.
+
+```c# filename="P2_7.C#"   copy
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        int rows;
+        int num = 1;
+
+        Console.Write("Enter the number of rows: ");
+        rows = int.Parse(Console.ReadLine());
+
+        for (int i = 1; i <= rows; i++)
+        {
+            for (int j = 1; j <= i; j++)
+            {
+                Console.Write(num + " ");
+                num++;
+            }
+            Console.WriteLine();
+        }
+    }
+}
+```
+
+### 8 Write a program to replace a substring of given length with new substring
+
+```c# filename="P2_8.C#"   copy
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        string originalString;
+        string newString;
+        int startIndex;
+        int length;
+
+        Console.Write("Enter the original string: ");
+        originalString = Console.ReadLine();
+
+        Console.Write("Enter the new string: ");
+        newString = Console.ReadLine();
+
+        Console.Write("Enter the starting index of the substring: ");
+        startIndex = int.Parse(Console.ReadLine());
+
+        Console.Write("Enter the length of the substring: ");
+        length = int.Parse(Console.ReadLine());
+
+        string modifiedString = originalString.Remove(startIndex, length).Insert(startIndex, newString);
+
+        Console.WriteLine("Modified string: " + modifiedString);
+    }
+}
+```

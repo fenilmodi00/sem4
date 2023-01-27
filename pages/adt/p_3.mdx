@@ -1,0 +1,198 @@
+# Practical_3 😶‍🌫️
+
+### 1 Write a program to remove duplicate elements of an array
+
+```java copy
+using System;
+using System.Linq;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        int[] originalArray = {1, 2, 3, 4, 5, 6, 7, 8, 9, 2, 3, 4, 5};
+        int[] uniqueArray = originalArray.Distinct().ToArray();
+
+        Console.WriteLine("Original Array: ");
+        foreach (int item in originalArray)
+        {
+            Console.Write(item + " ");
+        }
+        Console.WriteLine();
+
+        Console.WriteLine("Array with Unique Elements: ");
+        foreach (int item in uniqueArray)
+        {
+            Console.Write(item + " ");
+        }
+        Console.WriteLine();
+    }
+}
+```
+
+### 2 Write a program for multiplication of two 2-dimensional matrices using 2-d array
+
+```java copy
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        int[,] firstMatrix = {{1, 2}, {3, 4}};
+        int[,] secondMatrix = {{5, 6}, {7, 8}};
+
+        int[,] resultMatrix = new int[2, 2];
+
+        // Multiplying matrices
+        for (int i = 0; i < 2; i++)
+        {
+            for (int j = 0; j < 2; j++)
+            {
+                for (int k = 0; k < 2; k++)
+                {
+                    resultMatrix[i, j] += firstMatrix[i, k] * secondMatrix[k, j];
+                }
+            }
+        }
+
+        Console.WriteLine("Result Matrix: ");
+        for (int i = 0; i < 2; i++)
+        {
+            for (int j = 0; j < 2; j++)
+            {
+                Console.Write(resultMatrix[i, j] + " ");
+            }
+            Console.WriteLine();
+        }
+    }
+}
+```
+
+### 4 Write a program to generate Pascal Triangle using jagged array
+
+```java copy
+class Program
+{
+    static void Main(string[] args)
+    {
+        int rows = 10;
+        int[][] pascalTriangle = new int[rows][];
+
+        for (int i = 0; i < rows; i++)
+        {
+            // creating new inner array for each row
+            pascalTriangle[i] = new int[i + 1];
+            // first element of each row is 1
+            pascalTriangle[i][0] = 1;
+            // last element of each row is 1
+            pascalTriangle[i][i] = 1;
+
+            for (int j = 1; j < i; j++)
+            {
+                // calculating other element of each row
+                pascalTriangle[i][j] = pascalTriangle[i - 1][j - 1] + pascalTriangle[i - 1][j];
+            }
+        }
+
+        // printing pascal triangle
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j <= i; j++)
+            {
+                Console.Write(pascalTriangle[i][j] + " ");
+            }
+            Console.WriteLine();
+        }
+    }
+}
+```
+
+### 4 Write a user defined function to sort an array
+
+```java copy
+class Program
+{
+    static void Main(string[] args)
+    {
+        int[] numbers = {5, 2, 9, 1, 7, 3};
+        SortArray(numbers);
+
+        Console.WriteLine("Sorted Array: ");
+        foreach (int item in numbers)
+        {
+            Console.Write(item + " ");
+        }
+    }
+
+    static void SortArray(int[] array)
+    {
+        for (int i = 0; i < array.Length - 1; i++)
+        {
+            for (int j = i + 1; j < array.Length; j++)
+            {
+                if (array[i] > array[j])
+                {
+                    int temp = array[i];
+                    array[i] = array[j];
+                    array[j] = temp;
+                }
+            }
+        }
+    }
+}
+```
+
+### 5 Demonstrate the use of params keyword with the help of a programe
+
+```java copy
+class Program
+{
+    static void Main(string[] args)
+    {
+        AddNumbers(1, 2, 3, 4, 5);
+        AddNumbers(6, 7, 8, 9, 10, 11);
+        AddNumbers(12, 13, 14);
+    }
+
+    static void AddNumbers(params int[] numbers)
+    {
+        int sum = 0;
+        foreach (int number in numbers)
+        {
+            sum += number;
+        }
+        Console.WriteLine("Sum: " + sum);
+    }
+}
+```
+
+### 6 Discuss out and ref parameters with the help of programs
+
+```java copy
+class Program
+{
+    static void Main(string[] args)
+    {
+        int x;
+        x = 5;
+        Console.WriteLine("Value of x before method call: " + x);
+        OutMethod(out x);
+        Console.WriteLine("Value of x after out method call: " + x);
+
+        x = 5;
+        Console.WriteLine("Value of x before method call: " + x);
+        RefMethod(ref x);
+        Console.WriteLine("Value of x after ref method call: " + x);
+    }
+
+    static void OutMethod(out int number)
+    {
+        number = 10;
+    }
+    static void RefMethod(ref int number)
+    {
+        number = 15;
+    }
+}
+```

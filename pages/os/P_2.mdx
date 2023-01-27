@@ -1,0 +1,122 @@
+# Practical_2 😶‍🌫️
+
+#### 1 Write a shell script to scan your name and display it like My college Name is: UVPCE
+
+```bash copy
+
+echo "My college Name is: UVPCE"
+
+```
+
+#### 2 Write a shell script to scan two variables and to display their sum, mul, div, sub and modulo division
+
+```bash copy
+
+echo "Enter first number: "
+read num1
+echo "Enter second number: "
+read num2
+
+sum=$((num1 + num2))
+mul=$((num1 * num2))
+div=$((num1 / num2))
+sub=$((num1 - num2))
+mod=$((num1 % num2))
+
+echo "Sum: $sum"
+echo "Multiplication: $mul"
+echo "Division: $div"
+echo "Subtraction: $sub"
+echo "Modulo Division: $mod"
+
+```
+
+#### 3 Write a shell script to scan two variables and to display their sum, mul, div, sub and modulo division as per the user choice
+
+```bash copy
+#!/bin/bash
+
+# Store the two input variables
+var1=$1
+var2=$2
+
+# Print a menu of options
+echo "Select an operation:"
+echo "1) Addition"
+echo "2) Subtraction"
+echo "3) Multiplication"
+echo "4) Division"
+echo "5) Modulus division"
+
+# Read the user's choice
+read choice
+
+# Perform the selected operation
+case $choice in
+    1) result=$(($var1 + $var2))
+       echo "The sum of $var1 and $var2 is $result";;
+    2) result=$(($var1 - $var2))
+       echo "The difference of $var1 and $var2 is $result";;
+    3) result=$(($var1 * $var2))
+       echo "The product of $var1 and $var2 is $result";;
+    4) result=$(($var1 / $var2))
+       echo "The quotient of $var1 and $var2 is $result";;
+    5) result=$(($var1 % $var2))
+       echo "The remainder of $var1 divided by $var2 is $result";;
+    *) echo "Invalid choice";;
+esac
+```
+
+#### 4 Write a shell script to find greatest of two. Script must consider the case where two numbers are equal
+
+```bash copy
+#!/bin/bash
+
+# Store the two input variables
+var1=$1
+var2=$2
+
+# Compare the two variables
+if [ $var1 -gt $var2 ]
+then
+  echo "$var1 is greater than $var2"
+elif [ $var1 -lt $var2 ]
+then
+  echo "$var2 is greater than $var1"
+else
+  echo "Both $var1 and $var2 are equal"
+fi
+```
+
+#### 5Write a shell script to find greatest of three. Script must consider the case where two numbers are equal.
+
+```bash copy
+#!/bin/bash
+
+# Store the three input variables
+var1=$1
+var2=$2
+var3=$3
+
+# Compare the first two variables
+if [ $var1 -gt $var2 ] && [ $var1 -gt $var3 ]
+then
+  echo "$var1 is the greatest"
+elif [ $var2 -gt $var1 ] && [ $var2 -gt $var3 ]
+then
+  echo "$var2 is the greatest"
+elif [ $var3 -gt $var1 ] && [ $var3 -gt $var2 ]
+then
+  echo "$var3 is the greatest"
+else
+  if [ $var1 -eq $var2 ] && [ $var1 -eq $var3 ]
+  then
+    echo "All $var1, $var2 and $var3 are equal"
+  elif [ $var1 -eq $var2 ]
+  then
+    echo "Both $var1 and $var2 are equal"
+  else
+    echo "Both $var1 and $var3 are equal"
+  fi
+fi
+```

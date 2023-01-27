@@ -1,0 +1,384 @@
+---
+title: 'P_1'
+description: 'Learn how to create an API key and start building with Livepeer!'
+---
+
+
+# Practical_1 😶‍🌫️
+
+### 1 Implement a function for each of following problems and count the number of steps executed/Time taken by each function on various inputs and write complexity of each function. Also draw a comparative chart. In each of the following function N will be passed by user.
+#### 1 To calculate sum of 1 to N number using loop.
+```java copy 
+public static int sumUsingLoop(int N) {
+    int sum = 0;
+    for (int i = 1; i <= N; i++) {
+        sum += i;
+    }
+    return sum;
+}
+```
+#### 2 To calculate sum of 1 to N number using equation.
+``` java copy
+public static int sumUsingEquation(int N) {
+    return (N * (N + 1)) / 2;
+}
+```
+#### 3  To calculate sum of 1 to N numbers using recursion. in java
+``` java copy
+public static int sumUsingRecursion(int N) {
+    if (N == 0) {
+        return 0;
+    }
+    return N + sumUsingRecursion(N - 1);
+}
+```
+#### A comparative chart of the time complexity for the three functions would look like this:
+
+![compare](https://sem4.netlify.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ftime-com-compare-1.38fb4e41.png&w=828&q=75)
+
+### 2 Implement functions to print nth Fibonacci number using iteration and recursive method. Compare the performance of two methods by counting number of steps executed on various inputs. Also draw a comparative chart. (Fibonacci series 1, 1, 2, 3, 5, 8….. Here 8 is the 6th Fibonacci number)
+
+#### 1 Iteration Method
+````java copy 
+public class fibonicii {
+    public static void main(String[] args) {
+        int n1=0,n2=1,n3,i,count=10,count1=0;
+        System.out.print(n1+" "+n2);
+
+        for(i=2;i<count;++i) // count1++;
+        {
+            n3=n1+n2;
+            count1++;
+
+            n1=n2;    count1++;
+            n2=n3;
+            count1++;
+        }
+        System.out.println(" "+n3);
+        System.out.println("count = "+count1);
+    }
+}
+
+
+````
+#### 2 Recursive Method 
+````java copy
+public static int fibonacciRecursive(int n) {
+    if (n <= 0) {
+        return 0;
+    } else if (n == 1 || n == 2) {
+        return 1;
+    }
+    return fibonacciRecursive(n - 1) + fibonacciRecursive(n - 2);
+}
+````
+![copmx](https://sem4.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ftime-com-2.500ebcee.png&w=828&q=75)
+
+
+### 3 Write user defined functions for the following sorting methods and compare their performance by time measurement with random data and Sorted data.
+
+#### 1. Selection Sort
+``` java copy
+public static int[] selectionSort(int[] arr) {
+    for (int i = 0; i < arr.length - 1; i++) {
+        int minIndex = i;
+        for (int j = i + 1; j < arr.length; j++) {
+            if (arr[j] < arr[minIndex]) {
+                minIndex = j;
+            }
+        }
+        int temp = arr[minIndex];
+        arr[minIndex] = arr[i];
+        arr[i] = temp;
+    }
+    return arr;
+}
+```
+#### 2. Bubble Sort
+````java copy
+public static int[] bubbleSort(int[] arr) {
+    for (int i = 0; i < arr.length - 1; i++) {
+        for (int j = 0; j < arr.length - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+    return arr;
+}
+
+````
+#### 3. Insertion Sort
+````java copy
+public static int[] insertionSort(int[] arr) {
+    for (int i = 1; i < arr.length; i++) {
+        int key = arr[i];
+        int j = i - 1;
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j = j - 1;
+        }
+        arr[j + 1] = key;
+    }
+    return arr;
+}
+
+````
+#### 4. Merge Sort
+```` java copy
+public static int[] mergeSort(int[] arr) {
+    if (arr.length < 2) {
+        return arr;
+    }
+    int mid = arr.length / 2;
+    int[] left = Arrays.copyOfRange(arr, 0, mid);
+    int[] right = Arrays.copyOfRange(arr, mid, arr.length);
+    return merge(mergeSort(left), mergeSort(right));
+}
+
+private static int[] merge(int[] left, int[] right) {
+    int[] result = new int[left.length + right.length];
+    int i = 0;
+    int j = 0;
+    int k = 0;
+    while (i < left.length && j < right.length) {
+        if (left[i] <= right[j]) {
+            result[k] = left[i];
+            i++;
+        } else {
+            result[k] = right[j];
+            j++;
+        }
+        k++;
+    }
+    while (i < left.length) {
+        result[k] = left[i];
+        i++;
+        k++;
+    }
+    while (j < right.length) {
+        result[k] = right[j];
+        j++;
+        k++;
+    }
+    return result;
+}
+
+````
+#### 5. Quick Sort
+````java copy
+public static void quickSort(int[] arr, int low, int high) {
+    if (low < high) {
+        int pivotIndex = partition(arr, low, high);
+        quickSort(arr, low, pivotIndex);
+        quickSort(arr, pivotIndex + 1, high);
+    }
+}
+
+private static int partition(int[] arr, int low, int high) {
+    int pivot = arr[low];
+    int i = low - 1;
+    int j = high + 1;
+    while (true) {
+        do {
+            i++;
+        } while (arr[i] < pivot);
+        do {
+            j--;
+        } while (arr[j] > pivot);
+        if (i >= j) {
+            return j;
+        }
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+}
+````
+![comop](https://sem4.vercel.app/images/comp-3.png)
+
+### 4 Implement a function of sequential search and count the steps executed by function on various inputs for best case and worst case. Also write complexity in each case and draw a comparative chart.
+````java copy
+public static int sequentialSearch(int[] arr, int target) {
+    for (int i = 0; i < arr.length; i++) {
+        if (arr[i] == target) {
+            return i;
+        }
+    }
+    return -1;
+}
+````
+![comp-4](https://sem4.vercel.app/images/comp-4.png)
+
+### 5 Implement a function of binary search and count the steps executed by function on various inputs for best case and worst case. Also write complexity in each case and draw a comparative chart.
+````java copy
+public static int binarySearch(int[] arr, int target) {
+    int low = 0;
+    int high = arr.length - 1;
+    int steps = 0;
+    while (low <= high) {
+        steps++;
+        int mid = (low + high) / 2;
+        if (arr[mid] == target) {
+            return mid;
+        } else if (arr[mid] < target) {
+            low = mid + 1;
+        } else {
+            high = mid - 1;
+        }
+    }
+    return -1;
+}
+````
+![comp5](https://sem4.vercel.app/images/comp5.png)
+
+### 6 Implement program for randomized version of quick sort and compare its performance with normal version of quick sort using steps count on various number of inputs.
+#### 1 randomized version for quickSort
+```java copy
+import java.util.Random;
+
+public class RandomizedQuickSort {
+    public static void randomizedQuickSort(int[] arr, int low, int high) {
+        if (low < high) {
+            Random random = new Random();
+            int pivotIndex = random.nextInt(high - low + 1) + low;
+            int pivot = arr[pivotIndex];
+            int i = low;
+            int j = high;
+            while (i <= j) {
+                while (arr[i] < pivot) {
+                    i++;
+                }
+                while (arr[j] > pivot) {
+                    j--;
+                }
+                if (i <= j) {
+                    int temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                    i++;
+                    j--;
+                }
+            }
+            randomizedQuickSort(arr, low, j);
+            randomizedQuickSort(arr, i, high);
+        }
+    }
+}
+```
+
+#### 2 normal method for quickSort
+```java copy
+public class NormalQuickSort {
+    public static void quickSort(int[] arr, int low, int high) {
+        if (low < high) {
+            int pivotIndex = partition(arr, low, high);
+            quickSort(arr, low, pivotIndex);
+            quickSort(arr, pivotIndex + 1, high);
+        }
+    }
+
+    public static int partition(int[] arr, int low, int high) {
+        int pivot = arr[high];
+        int i = low - 1;
+        for (int j = low; j < high; j++) {
+            if (arr[j] <= pivot) {
+                i++;
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+        int temp = arr[i + 1];
+        arr[i + 1] = arr[high];
+        arr[high] = temp;
+        return i + 1;
+    }
+}
+```
+![comp6](https://sem4.vercel.app/images/comp6.png)
+
+
+### 7 Implement program of Counting Sort
+```java copy
+public static int[] countingSort(int[] arr) {
+    int max = Arrays.stream(arr).max().getAsInt();
+    int min = Arrays.stream(arr).min().getAsInt();
+    int[] count = new int[max - min + 1];
+    int[] output = new int[arr.length];
+    for (int i = 0; i < arr.length; i++) {
+        count[arr[i] - min]++;
+    }
+    for (int i = 1; i < count.length; i++) {
+        count[i] += count[i - 1];
+    }
+    for (int i = arr.length - 1; i >= 0; i--) {
+        output[count[arr[i] - min] - 1] = arr[i];
+        count[arr[i] - min]--;
+    }
+    return output;
+}
+```
+
+### 8 Implement Program for fractional knapsack using Greedy design technique
+```java copy
+public static double fractionalKnapsack(int[] wt, int[] val, int capacity) {
+    double maxValue = 0;
+    Item[] items = new Item[wt.length];
+    for (int i = 0; i < wt.length; i++) {
+        items[i] = new Item(wt[i], val[i]);
+    }
+    Arrays.sort(items, (i1, i2) -> {
+        double r1 = (double) i1.value / i1.weight;
+        double r2 = (double) i2.value / i2.weight;
+        return -Double.compare(r1, r2);
+    });
+    int currentWeight = 0;
+    for (Item item : items) {
+        if (currentWeight + item.weight <= capacity) {
+            maxValue += item.value;
+            currentWeight += item.weight;
+        } else {
+            int remaining = capacity - currentWeight;
+            maxValue += item.value * ((double) remaining / item.weight);
+            break;
+        }
+    }
+    return maxValue;
+}
+```
+
+### 9 Implement Program for “Making Change” using Greedy design technique
+```
+public static int makeChange(int[] coins, int change) {
+    int numCoins = 0;
+    for (int i = coins.length - 1; i >= 0; i--) {
+        while (change >= coins[i]) {
+            change -= coins[i];
+            numCoins++;
+        }
+    }
+    return numCoins;
+}
+
+```
+### 10 Implement Program for “Making Change” using Dynamic Programming
+```java copy
+public static int makeChange(int[] coins, int change) {
+    int[] dp = new int[change + 1];
+    Arrays.fill(dp, Integer.MAX_VALUE);
+    dp[0] = 0;
+    for (int i = 1; i <= change; i++) {
+        for (int j = 0; j < coins.length; j++) {
+            if (coins[j] <= i) {
+                dp[i] = Math.min(dp[i], dp[i - coins[j]] + 1);
+            }
+        }
+    }
+    return dp[change];
+}
+```
+
+

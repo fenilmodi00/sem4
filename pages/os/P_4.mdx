@@ -1,0 +1,274 @@
+# Practical_4 😶‍🌫️
+
+#### 1 Write a shell script to check whether the entered number is prime or not
+
+```bash copy
+#!/bin/bash
+
+# Get the input number
+read -p "Enter a number: " num
+
+# Check if the number is less than 2
+if [ $num -lt 2 ]; then
+  echo "Invalid input. Number must be greater than 1."
+  exit 1
+fi
+
+# Check if the number is prime
+for ((i=2; i<=num/2; i++))
+do
+  if [ $((num%i)) -eq 0 ]; then
+    echo "$num is not a prime number."
+    exit 0
+  fi
+done
+
+echo "$num is a prime number."
+
+```
+
+#### 2 Write a shell script to calculate HRA of employees depending upon their basic
+
+```bash copy
+#!/bin/bash
+
+# Get the basic salary
+read -p "Enter the basic salary: " basic
+
+# Calculate the HRA
+if [ $basic -lt 5000 ]
+then
+  hra=`echo "$basic*0.1" | bc`
+elif [ $basic -lt 10000 ]
+then
+  hra=`echo "$basic*0.2" | bc`
+else
+  hra=`echo "$basic*0.3" | bc`
+fi
+
+# Print the HRA
+echo "The HRA is: $hra"
+
+```
+
+#### 3 Write a shell script that greets the user by saying Good Morning, Good Afternoon, and Good Evening according to the system time.
+
+```bash copy
+#!/bin/bash
+
+current_time=$(date +%H)
+if [ $current_time -lt 12 ]; then
+  echo "Good morning!"
+elif [ $current_time -lt 18 ]; then
+  echo "Good afternoon!"
+else
+  echo "Good evening!"
+fi
+
+```
+
+#### 4 Write a shell script, which takes a filename as command line argument, asks the user if he wants to revoke the read, write permissions for the group and others for that particular file. If the answer is “y” then it should do so or else it should abort the operation.
+
+```bash copy
+#!/bin/bash
+
+# Get the input file name
+file=$1
+
+# Check if the file exists
+if [ ! -f $file ]; then
+    echo "File not found."
+    exit 1
+fi
+
+# Ask user if they want to revoke permissions
+read -p "Do you want to revoke read, write permissions for the group and others for the file '$file'? (y/n) " choice
+
+# Check user choice
+if [ $choice == "y" ]; then
+    # Revoke permissions
+    chmod o-rw $file
+    chmod g-rw $file
+    echo "Permissions revoked for the file '$file'."
+else
+    echo "Aborting operation."
+fi
+
+```
+
+#### 5 Write a shell script that asks the capital of Gujarat and repeats the question until the user gives correct answer.
+
+```bash copy
+#!/bin/bash
+
+while true; do
+  read -p "What is the capital of Gujarat? " answer
+  if [ $answer == "Gandhinagar" ]; then
+    echo "Correct!"
+    break
+  else
+    echo "Incorrect, please try again."
+  fi
+done
+```
+
+#### 6 Write a shell script to display desired line from a file
+
+```bash copy
+#!/bin/bash
+
+# Get the input file name
+file=$1
+
+# Get the input line number
+line_number=$2
+
+# Check if the file exists
+if [ ! -f $file ]; then
+    echo "File not found."
+    exit 1
+fi
+
+# Display the desired line
+sed -n "${line_number}p" $file
+```
+
+#### 7 Write a shell script to count number of newline characters in a file.
+
+```bash copy
+#!/bin/bash
+
+# Get the input file name
+file=$1
+
+# Check if the file exists
+if [ ! -f $file ]; then
+    echo "File not found."
+    exit 1
+fi
+
+# Count the number of newline characters in the file
+newline_count=$(grep -o $'\n' $file | wc -l)
+
+# Print the result
+echo "The number of newline characters in the file '$file' is $newline_count"
+
+```
+
+#### 8 Write a shell script to count number of spaces in a file.
+
+```bash copy
+#!/bin/bash
+
+# Get the input file name
+file=$1
+
+# Check if the file exists
+if [ ! -f $file ]; then
+    echo "File not found."
+    exit 1
+fi
+
+# Count the number of spaces in the file
+space_count=$(grep -o ' ' $file | wc -l)
+
+# Print the result
+echo "The number of spaces in the file '$file' is $space_count"
+
+```
+
+#### 9 Write a Shell script, which counts the number of words in a file, without taking into consideration the blank space, tab spaces and the newline characters using WC
+
+```bash copy
+#!/bin/bash
+
+# Get the input file name
+file=$1
+
+# Check if the file exists
+if [ ! -f $file ]; then
+    echo "File not found."
+    exit 1
+fi
+
+# Count the number of words in the file
+word_count=$(cat $file | tr -d ' \t\n' | wc -w)
+
+# Print the result
+echo "The number of words in the file '$file' is $word_count"
+
+```
+
+#### 10 0. Write a Shell script, which counts the number of words in a file, without taking into consideration the blank space, tab spaces and the newline characters without using WC
+
+```bash copy
+#!/bin/bash
+
+# Get the input file name
+file=$1
+
+# Check if the file exists
+if [ ! -f $file ]; then
+    echo "File not found."
+    exit 1
+fi
+
+# Count the number of words in the file
+word_count=0
+while IFS= read -r line
+do
+  word_count=$(($word_count + $(echo $line | tr -sc 'A-Za-z0-9' ' ' | wc -w)))
+done < $file
+
+# Print the result
+echo "The number of words in the file '$file' is $word_count"
+
+```
+
+#### 11 Write a Shell script, which counts the number of characters in a file, without taking into consideration the blank space, tab spaces and the newline characters using WC.
+
+```bash copy
+#!/bin/bash
+
+# Get the input file name
+file=$1
+
+# Check if the file exists
+if [ ! -f $file ]; then
+    echo "File not found."
+    exit 1
+fi
+
+# Count the number of characters in the file
+char_count=$(cat $file | tr -d ' \t\n' | wc -m)
+
+# Print the result
+echo "The number of characters in the file '$file' is $char_count"
+
+```
+
+#### 12 Write a Shell script, which counts the number of characters in a file, without taking into consideration the blank space, tab spaces and the newline characters without using WC.
+
+```bash copy
+#!/bin/bash
+
+# Get the input file name
+file=$1
+
+# Check if the file exists
+if [ ! -f $file ]; then
+    echo "File not found."
+    exit 1
+fi
+
+# Count the number of characters in the file
+char_count=0
+while IFS= read -r line
+do
+  char_count=$(($char_count + $(echo $line | tr -dc 'A-Za-z0-9' | wc -c)))
+done < $file
+
+# Print the result
+echo "The number of characters in the file '$file' is $char_count"
+
+```

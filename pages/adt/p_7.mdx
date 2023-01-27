@@ -1,0 +1,106 @@
+# Practical_7 😶‍🌫️
+
+### 1 Write a program to demonstrate use of ListBox control.
+
+```java copy
+using System;
+using System.Windows.Forms;
+
+public class Form1 : Form
+{
+    private ListBox listBox1;
+    private ListBox listBox2;
+    private TextBox selectedItemsTextBox;
+    private Button addButton;
+    private Button removeButton;
+
+    public Form1()
+    {
+        // Initialize first listbox
+        listBox1 = new ListBox();
+        listBox1.Location = new System.Drawing.Point(10, 10);
+        listBox1.Name = "listBox1";
+        listBox1.Size = new System.Drawing.Size(200, 120);
+        listBox1.SelectionMode = SelectionMode.MultiSimple;
+
+        // Add items to first listbox
+        listBox1.Items.Add("Item 1");
+        listBox1.Items.Add("Item 2");
+        listBox1.Items.Add("Item 3");
+        listBox1.Items.Add("Item 4");
+        listBox1.Items.Add("Item 5");
+
+        // Initialize second listbox
+        listBox2 = new ListBox();
+        listBox2.Location = new System.Drawing.Point(250, 10);
+        listBox2.Name = "listBox2";
+        listBox2.Size = new System.Drawing.Size(200, 120);
+
+        // Initialize selected items textbox
+        selectedItemsTextBox = new TextBox();
+        selectedItemsTextBox.Location = new System.Drawing.Point(10, 140);
+        selectedItemsTextBox.Name = "selectedItemsTextBox";
+        selectedItemsTextBox.Size = new System.Drawing.Size(200, 20);
+        selectedItemsTextBox.ReadOnly = true;
+
+        // Initialize add button
+        addButton = new Button();
+        addButton.Location = new System.Drawing.Point(10, 170);
+        addButton.Name = "addButton";
+        addButton.Size = new System.Drawing.Size(75, 23);
+        addButton.Text = "Add";
+        addButton.Click += new EventHandler(addButton_Click);
+
+        // Initialize remove button
+        removeButton = new Button();
+        removeButton.Location = new System.Drawing.Point(100, 170);
+        removeButton.Name = "removeButton";
+        removeButton.Size = new System.Drawing.Size(75, 23);
+        removeButton.Text = "Remove";
+        removeButton.Click += new EventHandler(removeButton_Click);
+
+        // Add controls to form
+        this.Controls.Add(listBox1);
+        this.Controls.Add(listBox2);
+        this.Controls.Add(selectedItemsTextBox);
+        this.Controls.Add(addButton);
+        this.Controls.Add(removeButton);
+    }
+
+    private void addButton_Click(object sender, EventArgs e)
+{
+    // Move selected items from first listbox to second listbox
+    for (int i = 0; i < listBox1.SelectedItems.Count; i++)
+    {
+        listBox2.Items.Add(listBox1.SelectedItems[i]);
+    }
+
+    // Remove selected items from first listbox
+    for (int i = listBox1.SelectedItems.Count - 1; i >= 0; i--)
+    {
+        listBox1.Items.Remove(listBox1.SelectedItems[i]);
+    }
+
+    // Update selected items textbox
+    selectedItemsTextBox.Text = "Selected Items: " + listBox1.SelectedItems.Count.ToString();
+}
+
+private void removeButton_Click(object sender, EventArgs e)
+{
+    // Move selected items from second listbox to first listbox
+    for (int i = 0; i < listBox2.SelectedItems.Count; i++)
+    {
+        listBox1.Items.Add(listBox2.SelectedItems[i]);
+    }
+
+    // Remove selected items from second listbox
+    for (int i = listBox2.SelectedItems.Count - 1; i >= 0; i--)
+    {
+        listBox2.Items.Remove(listBox2.SelectedItems[i]);
+    }
+
+    // Update selected items textbox
+    selectedItemsTextBox.Text = "Selected Items: " + listBox1.SelectedItems.Count.ToString();
+}
+
+```

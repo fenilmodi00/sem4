@@ -1,0 +1,134 @@
+# Practical_3 😶‍🌫️
+
+#### 1 Write a shell script to calculate the loss percentage of an article. Scan the cost price and selling price
+
+```bash copy
+ #!/bin/bash
+
+# Store the cost price and selling price
+cost_price=$1
+selling_price=$2
+
+# Calculate the loss
+loss=$(($cost_price - $selling_price))
+
+# Calculate the loss percentage
+loss_percentage=$(echo "scale=2; ($loss/$cost_price)*100" | bc)
+
+# Print the result
+echo "The loss percentage is $loss_percentage%"
+```
+
+#### 2 Write a shell script to accept numbers below 50 and to display the square of each. This should continue as long as the user wishes.
+
+```bash copy
+ #!/bin/bash
+
+while true; do
+  read -p "Enter a number below 50: " num
+  if [[ $num -lt 50 ]]; then
+    square=$((num*num))
+    echo "The square of $num is $square"
+  else
+    echo "Invalid input. Please enter a number below 50."
+  fi
+  read -p "Do you want to continue? (y/n) " cont
+  if [[ $cont == "n" ]]; then
+    break
+  fi
+done
+```
+
+#### 3 Write a shell script to display $50
+
+```bash copy
+ #!/bin/bash
+
+echo "\$50"
+
+```
+
+#### 4 Write a shell script to check whether the scanned string is found in a file or not. Display appropriate message.
+
+```bash copy
+#!/bin/bash
+
+# Get the input string
+read -p "Enter a string to search: " search_string
+
+# Get the input file name
+read -p "Enter a file name to search in: " file
+
+# Check if the file exists
+if [ ! -f $file ]; then
+   echo "File not found."
+   exit 1
+fi
+
+# Search the file for the input string
+if grep -q $search_string $file; then
+   echo "The string '$search_string' was found in the file '$file'."
+else
+   echo "The string '$search_string' was not found in the file '$file'."
+fi
+```
+
+#### 5 Write a shell script, which scans the name of the command and executes it.
+
+```bash copy
+#!/bin/bash
+
+# Get the input command
+read -p "Enter a command to execute: " cmd
+
+# Execute the command
+$cmd
+
+```
+
+#### 6 Write a shell script which displays January if we enter Jan, Janu, Janua or January.
+
+```bash copy
+#!/bin/bash
+
+# Get the input month
+read -p "Enter a month: " month
+
+# Check the input month
+case $month in
+ Jan|Janu|Janua|January)
+   echo "January"
+   ;;
+ *)
+   echo "Invalid input"
+   ;;
+esac
+
+```
+
+#### 7 Write a shell script to generate Fibonacci series
+
+```bash copy
+#!/bin/bash
+
+# Get the number of terms
+read -p "Enter the number of terms: " n
+
+# Initialize variables
+a=0
+b=1
+
+# Print the first two terms
+echo "The Fibonacci series is: "
+echo "$a"
+echo "$b"
+
+# Loop to generate and print the remaining terms
+for ((i=2; i<n; i++))
+do
+ c=$((a+b))
+ echo "$c"
+ a=$b
+ b=$c
+done
+```

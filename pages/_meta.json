@@ -1,15 +1,55 @@
 {
-  "index": "Introduction",
-  "another": "Another Page",
-  "advanced": "Advanced (A Folder)",
+  "index": {
+    "title": "Home",
+    "type": "page"
+  },
+
+  "adt": {
+    "title": "ADT",
+    "type": "page"
+  },
+  
+  "daa": {
+    "title": "DAA",
+    "type": "page"
+  },
+
+  "python": {
+    "title": "Python 🐍",
+    "type": "page"
+  },
+  
+  "os": {
+    "title": "OS",
+    "type": "page"
+  },
+  
+  
   "about": {
     "title": "About",
     "type": "page"
   },
+  
+    "more": {
+      "title": "more",
+      "type": "menu",
+      "items": {
+        "DE": {
+          "title": "DE",
+          "href": "/about"
+        },
+        "Maths": {
+          "title": "Maths",
+          "href": "mailto:hi@example.com"
+        }
+      }
+    }
+  ,
+
   "contact": {
     "title": "Contact ↗",
     "type": "page",
-    "href": "https://twitter.com/shuding_",
+    "href": "https://twitter.com/Fenil_TW",
     "newWindow": true
   }
 }

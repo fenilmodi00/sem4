@@ -1,0 +1,74 @@
+# Practical_5 😶‍🌫️
+
+### 1 Create a windows application having a Login module without a database.
+
+```java
+using System;
+using System.Windows.Forms;
+
+class LoginForm : Form
+{
+    private Label lblUsername;
+    private Label lblPassword;
+    private TextBox txtUsername;
+    private TextBox txtPassword;
+    private Button btnLogin;
+
+    public LoginForm()
+    {
+        this.lblUsername = new Label();
+        this.lblUsername.Text = "Username:";
+        this.lblUsername.Location = new Point(10, 10);
+        this.lblUsername.Size = new Size(70, 20);
+
+        this.lblPassword = new Label();
+        this.lblPassword.Text = "Password:";
+        this.lblPassword.Location = new Point(10, 35);
+        this.lblPassword.Size = new Size(70, 20);
+
+        this.txtUsername = new TextBox();
+        this.txtUsername.Location = new Point(90, 10);
+        this.txtUsername.Size = new Size(100, 20);
+
+        this.txtPassword = new TextBox();
+        this.txtPassword.Location = new Point(90, 35);
+        this.txtPassword.Size = new Size(100, 20);
+        this.txtPassword.PasswordChar = '*';
+
+        this.btnLogin = new Button();
+        this.btnLogin.Text = "Login";
+        this.btnLogin.Location = new Point(90, 60);
+        this.btnLogin.Size = new Size(100, 30);
+        this.btnLogin.Click += new EventHandler(this.btnLogin_Click);
+
+        this.Controls.Add(this.lblUsername);
+        this.Controls.Add(this.lblPassword);
+        this.Controls.Add(this.txtUsername);
+        this.Controls.Add(this.txtPassword);
+        this.Controls.Add(this.btnLogin);
+            this.Text = "Login";
+    this.Size = new Size(220, 130);
+    this.StartPosition = FormStartPosition.CenterScreen;
+}
+
+private void btnLogin_Click(object sender, EventArgs e)
+{
+    if (txtUsername.Text == "admin" && txtPassword.Text == "password")
+    {
+        MessageBox.Show("Welcome, admin");
+        // add code to open the main application form
+    }
+    else
+    {
+        MessageBox.Show("Invalid username or password");
+    }
+}
+
+public static void Main()
+{
+    Application.Run(new LoginForm());
+}
+}
+```
+
+# 🙇if code wrong 🙏

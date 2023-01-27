@@ -1,0 +1,165 @@
+# Practical_4 😶‍🌫️
+
+### 1 Write a program to create a Class named ATM having following methods which performs ATM transaction:
+
+#### Balance_check() :- To Check the balance of Current Account
+
+#### Debit() :- To Withdraw money into Current Account
+
+#### Credit() :- To add money into Current Account
+
+#### Get_info() :- To see information of Account Holder
+
+```java copy
+class ATM
+{
+    private double balance;
+    private string accountHolderName;
+    private string accountNumber;
+
+    public ATM(double initialBalance, string name, string number)
+    {
+        balance = initialBalance;
+        accountHolderName = name;
+        accountNumber = number;
+    }
+
+    public double Balance_check()
+    {
+        return balance;
+    }
+
+    public void Debit(double amount)
+    {
+        if (amount <= balance)
+        {
+            balance -= amount;
+            Console.WriteLine("Withdrawal of " + amount + " successful.");
+            Console.WriteLine("Your current balance is " + balance);
+        }
+        else
+        {
+            Console.WriteLine("Insufficient balance.");
+        }
+    }
+
+    public void Credit(double amount)
+    {
+        balance += amount;
+        Console.WriteLine("Deposit of " + amount + " successful.");
+        Console.WriteLine("Your current balance is " + balance);
+    }
+
+    public void Get_info()
+    {
+        Console.WriteLine("Account holder name: " + accountHolderName);
+        Console.WriteLine("Account number: " + accountNumber);
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        ATM account = new ATM(5000, "John Smith", "1234567890");
+
+        Console.WriteLine("Welcome to our ATM");
+        while (true)
+        {
+            Console.WriteLine("1. Check Balance");
+            Console.WriteLine("2. Withdraw Money");
+            Console.WriteLine("3. Deposit Money");
+            Console.WriteLine("4. Account Info");
+            Console.WriteLine("5. Exit");
+            Console.Write("Enter your choice: ");
+            int choice = int.Parse(Console.ReadLine());
+
+            switch (choice)
+{
+    case 1:
+        Console.WriteLine("Your current balance is " + account.Balance_check());
+        break;
+    case 2:
+        Console.Write("Enter amount to withdraw: ");
+        double amount = double.Parse(Console.ReadLine());
+        account.Debit(amount);
+        break;
+    case 3:
+        Console.Write("Enter amount to deposit: ");
+        amount = double.Parse(Console.ReadLine());
+        account.Credit(amount);
+        break;
+    case 4:
+        account.Get_info();
+        break;
+    case 5:
+        Console.WriteLine("Thank you for using our ATM. Have a nice day!");
+        Environment.Exit(0);
+        break;
+    default:
+        Console.WriteLine("Invalid choice. Please try again.");
+        break;
+}
+Console.WriteLine("\n");
+}
+}}
+```
+
+### 2 Write a program to find frequency of each element in an array using command Line Argumen
+
+```java copy
+class Program
+{
+    static void Main(string[] args)
+    {
+        int[] array = new int[args.Length];
+        for (int i = 0; i < args.Length; i++)
+        {
+            array[i] = int.Parse(args[i]);
+        }
+
+        int[] frequency = new int[array.Max() + 1];
+        for (int i = 0; i < array.Length; i++)
+        {
+            frequency[array[i]]++;
+        }
+
+        for (int i = 0; i < frequency.Length; i++)
+        {
+            if (frequency[i] != 0)
+            {
+                Console.WriteLine("Frequency of " + i + ": " + frequency[i]);
+            }
+        }
+    }
+}
+```
+
+### 3 Write a program to explain StringBuilder Class. [Note: Use Append(), AppendFormat(), Insert(), Remove(), Replace() Methods.]
+
+```java copy
+using System;
+using System.Text;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        StringBuilder sb = new StringBuilder("Hello, ");
+        sb.Append("World!");
+        Console.WriteLine(sb); // Output: Hello, World!
+
+        sb.AppendFormat(" Today is {0}", DateTime.Now.ToShortDateString());
+        Console.WriteLine(sb); // Output: Hello, World! Today is 01/25/2023
+
+        sb.Insert(7, "my ");
+        Console.WriteLine(sb); // Output: Hello, my World! Today is 01/25/2023
+
+        sb.Remove(12, 6);
+        Console.WriteLine(sb); // Output: Hello, my Today is 01/25/2023
+
+        sb.Replace("Today", "Yesterday");
+        Console.WriteLine(sb); // Output: Hello, my Yesterday is 01/25/2023
+    }
+}
+```
