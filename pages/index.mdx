@@ -2,6 +2,7 @@
 import { Tabs, Tab } from 'nextra-theme-docs';
 import { Callout } from 'nextra-theme-docs';
 import Card, { Cards } from '../components/Card'
+import Link from 'next/link'
 
 
 
@@ -28,25 +29,32 @@ Join the [Whatsapp community](https://google.com) for help along the way.
    <Card title="Hello world" description="Card Description nothing yet" link="#" />
     </Cards></Tabs> */}
 
-   <div className="mb-4 text-xl font-bold">Guides</div>
-      <Cards num={3}>
+   <div className="mb-4 text-xl font-bold">Subjects</div>
+      <Cards num={2}>
+      <Card
+          title="ADT"
+          description="ADT is like java ka bachha 👶"
+          icon="👼"
+          link="adt/p_2"
+        />
+
         <Card
-          title="Quickstart"
-          description="Get started building in minutes!"
-          icon="⏱"
-          link="#"
+          title="DAA"
+          description="DAA is like a detective, it helps you solve complex algorithms and data structures as if you were solving a crime case."
+          icon="🕵️‍♀️"
+          link="daa/P_1"
         />
         <Card
-          title="Create a livestream"
-          description="Create and playback a livestream."
-          icon="🔴"
-          link="#"
+          title="Python"
+          description="Python is like a snake, it may seem intimidating at first but once you get to know it, it'll slither its way into your heart."
+          icon="🐍"
+          link="python/P_2"
         />
         <Card
-          title="Upload a video asset"
-          description="Upload a video asset for optimized playback."
-          icon="📼"
-          link="#"
+          title="OS"
+          description="OS is like the conductor of an orchestra, it makes sure all the different parts of your computer are playing in harmony."
+          icon="🖥️"
+          link="os/P_2"
         />
       </Cards>
 
@@ -64,11 +72,3 @@ Join the [Whatsapp community](https://google.com) for help along the way.
   under construction
 </Callout>
 
-<Callout type="warning" emoji="⚠️">
-  under construction
-</Callout>
-
-
-<Callout type="warning" emoji="⚠️">
-  under construction
-</Callout>
