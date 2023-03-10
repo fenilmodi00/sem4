@@ -1,0 +1,83 @@
+# Practical_6 😶‍🌫️
+
+### 1 ⦁	Write a program to perform addition of two numbers using user defined function.
+```py filename="P6_1.py"   copy
+def add(a,b):
+    sum=a+b
+    return sum
+print("ADDITION :-",add(25,25))
+```
+
+### 2 ⦁	Write a program to display all the prime numbers between 1 to n using function
+```py filename="P6_2.py"   copy
+def prime(n):
+    for i in range(2,n):
+        flag=0
+        for j in range(2,i):
+            if i%j==0:
+                flag=1
+                break
+        if flag==0:
+            print(i)
+n=int(input("Enter range"))
+prime(n)
+
+```
+
+### 3 ⦁	Write a user defined function to sort a List
+```py filename="P6_3.py"   copy
+l1= list(input("Enter variables: ").split())
+n=len(l1)-1
+print(n)
+print("No. of list is:-",l1)
+
+def sorting(l1,n):
+    temp=[]
+    for i in range(0,n):
+        for j in range(0,n):
+            if l1[j]>l1[j+1]:
+                temp.append(l1[j])
+                l1[j]=l1[j+1]
+                l1[j+1]=temp[0]
+                temp.pop(0)
+    print("After sorting list:-",l1)
+sorting(l1,n)
+```
+### 4 ⦁	Write a function to find the minimum and maximum value from argument list & return both minimum & maximum in tuple form
+```py filename="P6_4.py"   copy
+def min_max(l1):
+    temp1 = l1[0]
+    temp2 = l1[0]
+    tuple1 = ()
+    for i in range(0, len(l1) - 1):
+        if temp1 < l1[i + 1]:
+            temp1 = l1[i + 1]
+        if temp2 > l1[i + 1]:
+            temp2 = l1[i + 1]
+    tuple1 = tuple1 + ("Maximum element in list:",) + (temp1,) + ("Min element in list",) + (temp2,)
+    print(tuple1)
+
+min_max([999,25,3,678,100,2])
+```
+
+### 5 ⦁	Write a function to add two lists of the same length term-by-term & return new list 
+```py filename="P6_5.py"   copy
+def listadd(a, b):
+    c = []
+    for i in range(0, len(a)):
+        c.append(a[i]+b[i])
+    return c
+ans = listadd([11,12,13], [21,22,23])
+print("Addition of two lists:-",ans)
+```
+
+### 6 ⦁	WAP a function called powers(n) that prints out the first 5 powers of a given number
+```py filename="P6_6.py"   copy
+def powers(n):
+    print("First 5 power of number {}".format(n))
+    for i in range(0, 5):
+        print(n**i)
+num = int(input("Enter Number :"))
+powers(num)
+```
+

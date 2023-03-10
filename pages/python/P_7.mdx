@@ -1,0 +1,53 @@
+# Practical_7 😶‍🌫️
+
+### 1 ⦁	Write a Python program to read content from a file and display the word with maximum length.
+```py filename="P7_1.py"   copy
+d=open("prac1.txt","r")
+print(d.read())
+d.close()
+
+x=open("prac1.txt","r")
+maximum=0
+word=""
+for i in x:
+    for j in i.split():
+        if len(j)>maximum:
+            maximum=len(j)
+            word=j
+print("Maximum len of Word is",word)
+print("Word Length is",maximum)
+```
+
+### 2 ⦁	Write a Python program to combine each line from first file with the corresponding line in second file.
+```py filename="P7_2.py"   copy
+f1 = open("prac1.txt")
+f2 = open("prac2.txt")
+f3 = open("prac3.txt", "w")
+fl1 = f1.readlines()
+fl2 = f2.readlines()
+fl11 = []
+ln = int((len(fl1) + len(fl2))/2)
+for i in range(0, len(fl1)):
+    fl11.append(fl1[i].splitlines())
+for i in range(0, ln):
+    temp = fl11[i][0] + " " + fl2[i]
+    f3.write(temp)
+    temp = ""
+f1.close()
+f2.close()
+f3.close()
+f3 = open("prac3.txt", 'r')
+print(f3.read())
+f3.close()
+
+```
+
+### 3 ⦁	Write a Python program to read first n lines of a file.
+```py filename="P3_3.py"   copy
+a=int(input("Enter how many lines we have to see:-"))
+f = open("prac2.txt", "r")
+for i in range(0,a):
+    print(f.readline())
+f.close()
+
+```

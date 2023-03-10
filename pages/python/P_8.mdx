@@ -1,0 +1,189 @@
+# Practical_8 😶‍🌫️
+
+### 1 Create a class Employee with data members: name, department and salary. Use constructor to initialize values and "display()" method for printing information of three employees
+```py filename="P7_1.py"   copy
+class Emp:
+    def __init__(self, name, eid, salary):
+        self.Eid = eid
+        self.name = name
+        self.salary = salary
+    def display(self):
+        print("eid : {} name : {} salary : {}".format(self.Eid, self.name, self.salary))
+EMP1 = Emp('Dhruv', '1', '500000')
+EMP2 = Emp('Ayush', '2', '50000')
+EMP3 = Emp('Abhi', '3', '500000')
+EMP1.display()
+EMP3.display()
+EMP2.display()
+```
+### 2 ⦁	Write a program to create class Student with following attributes: instance variables enrollment_no, name and branch; instance methods get_value() and print_value(); class variable cnt; static method show(). Variable cnt counts number of instances created and show() method displays value of cnt.
+```py filename="P7_2.py"   copy
+class student :
+    cnt=0
+    def __init__(self):
+        student.cnt+=1
+    def getvalues (self,eno,name,branch):
+        self.eno=eno
+        self.name=name
+        self.branch=branch
+    def printvalues(self):
+        print("Enrollment no : {},Name : {},Branch :{}".format(self.eno,self.name,self.branch))
+    def show(self):
+        print("no of instance of class is :",student.cnt)
+s1=student()
+s2=student()
+s3=student()
+s4=student()
+s5=student()
+s1.getvalues(1,'DHRUV','CE')
+s2.getvalues(2,'AYUSH','CE')
+s3.getvalues(3,'ABHI','IT')
+s4.getvalues(4,'DEV','CE')
+s5.getvalues(5,'GOVIND','CE')
+s1.printvalues()
+s2.printvalues()
+s3.printvalues()
+s4.printvalues()
+s5.printvalues()
+```
+### 3 ⦁	Write a program to overload ** (exponential) operator.
+```py filename="P7_3.py"   copy
+class exp:
+    def __init__(self,x=0,y=0):
+        self.x=x
+        self.y=y
+    def __str__(self):
+        return('{} {}'.format(self.x,self.y))
+    def __pow__(self,other):
+        x=self.x**other.x
+        y=self.y**other.y
+        return exp(x,y)
+e1=exp(2,3)
+e2=exp(2,3)
+print(e1.__pow__(e2))
+```
+
+### 4 ⦁	Create class Hospital having attributes patient_no, patient_name and disease_name and  an instance p1. Show use of methods getattr(), setattr(), delattr(), and hasattr() for p1. Display values of attributes   dict   ,   doc   ,    name__,    module    ,    bases    with  respect to class Hospital. Delete instance p1 in the end.
+```py filename="P7_4.py"   copy
+class hospital:
+    def __init__(self,patient_no, patient_name ,disease_name ):
+        self.patient_no=patient_no
+        self.patient_name=patient_name
+        self.disease_name=disease_name
+p1=hospital(1,"Dhruv","Cancer")
+print("patient Name:",getattr(p1,"patient_name"))
+setattr(p1,"patient_name","Ayush")
+print("update patient name:",p1.patient_name)
+delattr(p1,"disease_name")
+print("patient no is in patient details or not:",hasattr(p1,"disease_name"))
+print(hospital.__dict__)
+print(hospital.__doc__)
+print(hospital.__name__)
+print(hospital.__module__)
+print(hospital.__bases__)
+del p1
+```
+### 5 ⦁	Design a class Lion having method roar() and a class Cub having method play() which inherits class Lion. Use instance of Cub called- simba to access methods roar() and play(). Define public attribute legs, protected attribute ears and private attribute mane of class Lion. Show accessibility of these variables according to their scope.
+```py filename="P7_5.py"   copy
+class lion:
+    def __init__(self, a, b, c):
+        self.a = a
+        self.b = b
+        self.c = c
+    def roar(self):
+        print("This is roar method")
+        print(simba.a)
+        simba.a = 'Leg'
+        print(simba.a)
+class cub(lion):
+    def play(self):
+        print("This is play method ")
+        print(simba.b)
+        simba.b = "Ears"
+        print(simba.b)
+simba = cub('public', 'protected', 'private')
+simba.roar()
+simba.play()
+print(simba.c)
+simba.c="Mane"
+print(simba.c)
+```
+###	6 Class Person with attributes- name and age is inherited by class SportPerson with  attribute sport_name. Use appropriate init__() method for both classes. Call parent init () method from child init  () method with the help of  (A) super() method (B)  parent class name.
+```py filename="P7_6.py"   copy
+class person:
+ def __init__(self,name,age):
+  self.name=name
+  self.age=age
+ def print(self):
+  print("*************************")
+  print("Name : ",self.name)
+  print("Age :",self.age)
+  print("*************************")
+class sports(person):
+ def __init__(self,name,age,sname):
+  super().__init__(name,age)
+  self.sname=sname
+ def show(self):
+  print("*************************")
+  print("Name : ",self.name)
+  print("Age : ",self.age)
+  print("Sports name : ",self.sname)
+  print("*************************")
+s=sports("Fenil",19,'Football')
+s.show()
+```
+### 7 ⦁	Write programs to implement following scenarios where A, B, C, D, E and F are classes and check() is a method. In both scenarios, which check() method is called, when we execute statement- E().check()
+#### Scenario-1
+```py filename="P7_7_1.py"   copy
+class a:
+ def check(self):
+    print("This is class A")
+class b(a):
+ pass
+class c(b):
+ def check(self):
+    print("This is class C")
+class d(a):
+ def check(self):
+    print("This is class D")
+class e(b,d):
+ pass
+e().check()
+```
+#### Scenario-2
+```py filename="P7_7_2.py"   copy
+class a:
+ def check(self):
+    print("This is class A")
+class f:
+ def check(self):
+    print("This is class F")
+class b(a):
+ pass
+class c(f):
+ def check(self):
+    print("This is class C")
+class d(f):
+ def check(self):
+    print("This is class D")
+class e(b,c,d):
+ pass
+e().check()
+```
+
+### 8 ⦁	Write a program in which Python and Snake sub classes implement abstract methods- crawl() and sting() of the super class Reptile. What is the output of following statements?
+```py filename="P7_8.py"   copy
+class Reptile():
+    def craw(self):
+        print("this crawl method")
+    def string (self):
+        print("this is sting method")
+class python (Reptile):
+    def crawl(self):
+        print("this crawl method in python class")
+class snake(Reptile):
+    def sting(self):
+        print("this is sting method in snake class")
+print(issubclass(python,Reptile))
+print(isinstance(snake(),Reptile))
+```
