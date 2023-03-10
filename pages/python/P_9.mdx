@@ -1,0 +1,137 @@
+# Practical_9 😶‍🌫️
+### 1 Write a python code to establish connection with MySQL andcreate database demo_data. Also display list of all the available database.
+```py filename="P8_2.py"   copy
+import mysql.connector
+mycon=mysql.connector.connect(host='localhost',user='root',password='bhavy@15
+')
+cur=mycon.cursor()
+cur.execute('show databases')
+for x in cur:
+print (x)
+cur.execute('create database demo_data')
+cur.execute('show databases')
+for x in cur:
+```
+### 2 Write a python code to create below specified twotables ‘hospital_details’ and ‘doctor_details’ and insert values as mentioned below.
+#### Create Table
+```py filename="P8_2.py"   copy
+import mysql.connector
+con=mysql.connector.connect(host='localhost',database='test',user='root',pass
+word='bhavy@15')
+cur=con.cursor()
+cur.execute('create table hospital_details(Hospital_Id int, Hospital_Name
+varchar(20),Bed_count int)')
+cur.execute('show tables')
+for i in cur:
+print(i)
+con.close()
+```
+#### insert value
+```py filename="P8_2.py"   copy
+import mysql.connector
+con=mysql.connector.connect(host='localhost',database='test',user='root',pass
+word='bhavy@15')
+cur=con.cursor()
+cur.execute('insert into hospital_details values(1,"Janta",200)')
+cur.execute('insert into hospital_details values(2,"Zydus",500)')
+cur.execute('insert into hospital_details values(3,"Sal",1000)')
+cur.execute('insert into hospital_details values(4,"Stirling",1500)')
+con.commit()
+print(cur.rowcount,"rows inserted")
+con.close()
+```
+#### show value 
+```py filename="P8_2.py"   copy
+import mysql.connector
+con=mysql.connector.connect(host='localhost',database='test',user='root',pass
+word='bhavy@15')
+cur=con.cursor()
+cur.execute('select * from hospital_details')
+result=cur.fetchall()
+for i in result:
+print (i)
+con.commit()
+con.close()
+```
+#### FOr Docters
+#### Create Table 
+```py filename="P8_2.py"   copy
+import mysql.connector
+con=mysql.connector.connect(host='localhost',database='test',user='root',pass
+word='bhavy@15')
+cur=con.cursor()
+cur.execute('create table doctor_details(Doctor_Id int, Doctor_Name
+varchar(20),Hospital_Id int,Speciality varchar(20),Salary int,Experienve
+int)')
+cur.execute('show tables')
+for i in cur:
+print(i)
+con.close()
+```
+#### insert values
+```py filename="P8_2.py"   copy
+import mysql.connector
+con=mysql.connector.connect(host='localhost',database='test',user='root',pass
+word='bhavy@15')
+cur=con.cursor()
+cur.execute('insert into doctor_details
+values(101,"karan",1,"Pediatric",40000,0)')
+cur.execute('insert into doctor_details
+values(102,"Naresh",1,"Onchologist",80000,5)')
+cur.execute('insert into doctor_details
+values(103,"Hardik",2,"Surgen",60000,2)')
+cur.execute('insert into doctor_details
+values(104,"Vishal",2,"Homeopathy",50000,1)')
+cur.execute('insert into doctor_details
+values(105,"Jay",3,"Aayurvedic",40000,0)')
+cur.execute('insert into doctor_details
+values(106,"Deep",3,"Physeotherapist",70000,4)')
+cur.execute('insert into doctor_details
+values(107,"Divyesh",4,"Pediatric",55000,3)')
+cur.execute('insert into doctor_details
+values(108,"Arjun",4,"Scin",55000,3)')
+con.commit()
+print(cur.rowcount,"rows inserted")
+con.close()
+```
+#### 3 Show value
+```py filename="P8_2.py"   copy
+import mysql.connector
+con=mysql.connector.connect(host='localhost',database='test',user='root',pass
+word='bhavy@15')
+cur=con.cursor()
+cur.execute('select * from doctor_details')
+result=cur.fetchall()
+for i in result:
+print (i)
+con.commit()
+con.close()
+```
+
+### 3 Write a python code to retrieve all the details of doctors.Code
+```py filename="P9_3.py"   copy
+import mysql.connector
+con=mysql.connector.connect(host='localhost',database='test',user='root',pass
+word='bhavy@15')
+cur=con.cursor()
+cur.execute('select * from doctor_details')
+result=cur.fetchall()
+for i in result:
+print (i)
+con.commit()
+con.close()
+```
+### 4 Write a python code to retrieve all the doctors who are in Jantahospital.
+```py filename="P9_4.py"   copy
+import mysql.connector
+con=mysql.connector.connect(host='localhost',database='test',user='root',pass
+word='bhavy@15')
+cur=con.cursor()
+cur.execute('select * from doctor_details where Hospital_Id=1')
+result=cur.fetchall()
+for i in result:
+print (i)
+con.commit()
+con.close()
+```
+### 5 Write a python code to update experience of doctors.
