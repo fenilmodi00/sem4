@@ -1,0 +1,74 @@
+# Practical_11 😶‍🌫️
+
+### 1 Develop Login module with CGI script having sign up and sign-in pages: 
+
+#### SignUp.py
+```py filename="SignUp.py" copy 
+ import
+cgi,cgitb import
+pymysql
+pymysql.install_as_MySQLdb() import MySQLdb
+form = cgi.FieldStorage()
+email = form.getvalue('email') username =
+form.getvalue('un')
+password = form.getvalue('pw')
+print("Contenttype:text/html\r\n\r\n") print("<html>")
+print("<head>") print("<title>SignUp</title>")
+print("</head>") print("<body>") print("<form
+action='SignUp.py' method='post'>")
+print("Enter Email: <br> <input type="email" placeholder="Enter Email"
+name="email" required>br><br>") print("Enter Username:
+<br><input type="text" placeholder="Enter
+Username" name="un" required><br><br>")
+print("Enter Password: <br><input type="password" placeholder="Enter
+Password" name="pw" required><br><br>") print("<input
+type='submit' value='Sign Up'>") try:
+con =
+pymysql.connect(host="localhost",port=3309,user="bhargav",database="info",passwd="bh ar
+gav123") cursor = con.cursor() 
+#print("database opened successfully...")
+except: print("Error in
+connection")
+print("<a href='SignIn.py'>SignIn</a>") val = (email,username,
+password) cursor.execute("insert into data values(%s,%s,%s)",
+val) print("<script>alert('data inserted successfully. ....
+')</script>")
+con.commit() print("</body>") print("</html>") 
+```
+#### SignIn
+```py filename="signin.py" copy
+import
+cgi,cgitb import
+pymysql
+pymysql.install_as_MySQLdb() import
+MySQLdb
+print("Content-type:text/html\r\n\r\n") print("<html>")
+print("<head>") print("<title>SignIn</title>") print("</head>")
+print("<body>") print("<form action='SignIn.py' method='post'>") print("Enter
+Username: <br> <input type="text" placeholder="Enter Username" name="un"
+required>br><br>") print("Enter Password:
+<br><input type="password" placeholder="Enter Password"
+name="pw" required><br><br>")
+print("<input type='submit' value='Sign In'>")
+form = cgi.FieldStorage()
+username1 = form.getvalue('un1') password1
+= form.getvalue('pw1')
+try:
+con = pymysql.connect(host="localhost",port=3309, user="darshan",
+database="info", passwd="darshan123") cursor = con.cursor() #print('opened
+database successfully') except:
+print("error in connection") sql = "select * from data where user_name=%s and
+pass_word=%s" val=(username1,password1) cursor.execute(sql,val) myresult =
+cursor.fetchone() if myresult is not None:
+print("<h1>Welcome</h1>")
+print("<script>window.location.href='http://localhost/pr_10/welcome.py'</script>") else:
+print("Login failed")
+print("</body>") print("</html>") 
+```
+#### Welcome
+```py copy
+print("content-type:text/html\r\n\r\n") print("<html>")
+print("<head>") print("</head>") print("<body>")
+print("<h1><i><font
+color='blue'>Welcome!!!</font></i></h1>") print("</body>") print("</html>") 
+```

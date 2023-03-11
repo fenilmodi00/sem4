@@ -1,0 +1,125 @@
+# Practical_12 😶‍🌫️
+
+### 1 Create server.py and client.py file and create chat applications for continuous communication between both.
+#### Server.py
+```py filename="Server.py" copy
+import time, socket, sys
+print("\nWelcome to Chat Room\n")
+print("Initialising....\n")
+time.sleep(1)
+s = socket.socket()
+host = socket.gethostname()
+ip = socket.gethostbyname(host)
+port = 1234
+s.bind((host, port))
+print(host, "(", ip, ")\n")
+name = input(str("Enter your name: "))
+s.listen(1)
+print("\nWaiting for incoming connections...\n")
+conn, addr = s.accept()
+print("Received connection from ", addr[0], "(", addr[1], ")\n")
+s_name = conn.recv(1024)
+s_name = s_name.decode()
+print(s_name, "has connected to the chat room\nEnter [e] to exit chat
+room\n")
+conn.send(name.encode())
+while True:
+message = input(str("Me : "))
+if message == "[e]":
+message = "Left chat room!"
+conn.send(message.encode())
+print("\n")
+break
+conn.send(message.encode())
+message = conn.recv(1024)
+message = message.decode()
+print(s_name, ":", message)
+```
+#### client.py
+```py filename="client" copy
+import time, socket, sys
+print("\nWelcome to Chat Room\n")
+print("Initialising....\n")
+time.sleep(1)
+s = socket.socket()
+shost = socket.gethostname()
+ip = socket.gethostbyname(shost)
+print(shost, "(", ip, ")\n")
+host = input(str("Enter server address: "))
+name = input(str("\nEnter your name: "))
+port = 1234
+print("\nTrying to connect to ", host, "(", port, ")\n")
+time.sleep(1)
+s.connect((host, port))
+print("Connected...\n")
+s.send(name.encode())
+s_name = s.recv(1024)
+s_name = s_name.decode()
+print(s_name, "has joined the chat room\nEnter [e] to exit chat room\n")
+while True:
+message = s.recv(1024)
+message = message.decode()
+print(s_name, ":", message)
+message = input(str("Me : "))
+if message == "[e]":
+message = "Left chat room!"
+s.send(message.encode())
+print("\n")
+break
+s.send(message.encode())
+```
+
+#### 2 Write a python program to demonstrate usage of multi threading
+
+```py copy
+import threading
+import time
+class myThread (threading.Thread):
+def __init__(self, threadID, name, counter):
+threading.Thread.__init__(self)
+self.threadID = threadID
+self.name = name
+self.counter = counter
+def run(self):
+print("Starting " + self.name)
+threadLock.acquire()
+print_time(self.name, self.counter, 3)
+threadLock.release()
+def print_time(threadName, delay, counter):
+while counter:
+time.sleep(delay)
+print ("%s: %s" % (threadName, time.ctime(time.time())))
+counter -= 1
+threadLock = threading.Lock()
+threads = []
+thread1 = myThread(1, "Thread-1", 1)
+thread2 = myThread(2, "Thread-2", 2)
+thread1.start()
+thread2.start()
+threads.append(thread1)
+threads.append(thread2)
+for t in threads:
+t.join()
+print("Exiting Main Thread")
+```
+
+### 3 Write a python code to send email by attaching .jpeg file as a content.
+
+```py copy
+import smtplib as s
+import os
+from email.mime.image import MIMEImage
+from email.mime.multipart import MIMEMultipart
+ob=s.SMTP("smtp.gmail.com", 587)
+ob.starttls()
+ob.login("dhruvlakhani@gmail.com","PASSWORD")
+msg = MIMEMultipart()
+msg['Subject'] = "Email fromSMTP Python"
+image_data =open(r"C:\Users\dell_\Downloads\image.jpg",'rb').read()
+image =MIMEImage(image_data, name="image.jpg")
+msg.attach(image)
+list_email = ['dhruv123@gmail.com']
+ob.sendmail('dhruvlakhani@gmail.com’,list_email,msg.as_string())
+ob.quit()
+print("Mail Sent!!")
+```
