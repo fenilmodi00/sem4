@@ -213,24 +213,76 @@ public static int sequentialSearch(int[] arr, int target) {
 ![comp-4](https://sem4.vercel.app/images/comp-4.png)
 
 ### 5 Implement a function of binary search and count the steps executed by function on various inputs for best case and worst case. Also write complexity in each case and draw a comparative chart.
-````java copy
-public static int binarySearch(int[] arr, int target) {
-    int low = 0;
-    int high = arr.length - 1;
-    int steps = 0;
-    while (low <= high) {
-        steps++;
-        int mid = (low + high) / 2;
-        if (arr[mid] == target) {
-            return mid;
-        } else if (arr[mid] < target) {
-            low = mid + 1;
-        } else {
-            high = mid - 1;
-        }
-    }
-    return -1;
+````c copy
+#include<stdio.h>
+#include<conio.h>
+void binary_search(int[],int,int);
+void selection_sort(int[],int);
+void main()
+{
+	int list[200],n,i,key;
+	printf("\nHow Many Value to Enter ");
+	scanf("%d",&n);
+	for(i=0;i<n;i++)
+	{
+		printf("\nEnter Values ");
+		scanf("%d",&list[i]);
+	}
+	printf("\n\nEnter The Searching Element ");
+	scanf("%d",&key);
+	selection_sort(list,n);
+	printf("\nSorted data\n");
+	for(i=0;i<n;i++)
+	{
+		printf("\nValues= %d",list[i]);
+	}
+	binary_search(list,n,key);
 }
+void selection_sort(int list[],int n)
+{
+	int i,j,temp;
+	for(i=0;i<n;i++)
+	{
+		for(j=i+1;j<n;j++)
+		{
+			if(list[i]>list[j])
+			{
+				temp=list[i];
+				list[i]=list[j];
+				list[j]=temp;
+			}
+		}
+	}
+}
+void binary_search(int list[],int n,int key)
+{
+	int low,high,mid,flag=0;
+	low=0;
+	high=n;
+	mid=(low+high)/2;
+	while(flag!=1 && low<=high)
+	{
+		if(key==list[mid])
+		{
+			printf("\n\nValue = %d is Found ",key);
+			flag=1;
+		}
+		else if(key<list[mid])
+		{
+			high=mid-1;
+		}
+		else
+		{
+			low=mid+1;
+		}
+		mid=(low+high)/2;
+	}
+	if(flag==0)
+	{
+	printf("\n Not Found ");
+	}
+}
+
 ````
 ![comp5](https://sem4.vercel.app/images/comp5.png)
 
