@@ -34,10 +34,6 @@
       "title": "more",
       "type": "menu",
       "items": {
-        "DE": {
-          "title": "DE",
-          "href": "/about"
-        },
         "Maths": {
           "title": "Maths",
           "href": "mailto:hi@example.com"
