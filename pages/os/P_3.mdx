@@ -3,20 +3,21 @@
 #### 1 Write a shell script to calculate the loss percentage of an article. Scan the cost price and selling price
 
 ```bash copy
- #!/bin/bash
+#!/bin/bash
 
-# Store the cost price and selling price
-cost_price=$1
-selling_price=$2
+echo "Enter cost price: "
+read cost_price
 
-# Calculate the loss
-loss=$(($cost_price - $selling_price))
+echo "Enter selling price: "
+read selling_price
 
-# Calculate the loss percentage
-loss_percentage=$(echo "scale=2; ($loss/$cost_price)*100" | bc)
-
-# Print the result
-echo "The loss percentage is $loss_percentage%"
+if (( selling_price < cost_price )); then
+  loss=$(( cost_price - selling_price ))
+  loss_percentage=$(( loss * 100 / cost_price ))
+  echo "Loss percentage: $loss_percentage%"
+else
+  echo "No loss incurred"
+fi
 ```
 
 #### 2 Write a shell script to accept numbers below 50 and to display the square of each. This should continue as long as the user wishes.
