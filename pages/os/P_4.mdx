@@ -138,20 +138,20 @@ sed -n "${line_number}p" $file
 ```bash copy
 #!/bin/bash
 
-# Get the input file name
-file=$1
+# Get user input for file name
+read -p "Enter file name: " file_name
 
-# Check if the file exists
-if [ ! -f $file ]; then
-    echo "File not found."
-    exit 1
+# Check if file exists
+if [[ ! -f "$file_name" ]]; then
+  echo "Error: File $file_name does not exist."
+  exit 1
 fi
 
-# Count the number of newline characters in the file
-newline_count=$(grep -o $'\n' $file | wc -l)
+# Count number of lines in file
+line_count=$(wc -l < "$file_name")
 
-# Print the result
-echo "The number of newline characters in the file '$file' is $newline_count"
+# Display result
+echo "Number of lines in file $file_name: $line_count"
 
 ```
 
@@ -160,21 +160,20 @@ echo "The number of newline characters in the file '$file' is $newline_count"
 ```bash copy
 #!/bin/bash
 
-# Get the input file name
-file=$1
+# Get user input for file name
+read -p "Enter file name: " file_name
 
-# Check if the file exists
-if [ ! -f $file ]; then
-    echo "File not found."
-    exit 1
+# Check if file exists
+if [[ ! -f "$file_name" ]]; then
+  echo "Error: File $file_name does not exist."
+  exit 1
 fi
 
-# Count the number of spaces in the file
-space_count=$(grep -o ' ' $file | wc -l)
+# Count number of spaces in file
+space_count=$(tr -d -c ' ' < "$file_name" | wc -c)
 
-# Print the result
-echo "The number of spaces in the file '$file' is $space_count"
-
+# Display result
+echo "Number of spaces in file $file_name: $space_count"
 ```
 
 #### 9 Write a Shell script, which counts the number of words in a file, without taking into consideration the blank space, tab spaces and the newline characters using WC
@@ -182,20 +181,20 @@ echo "The number of spaces in the file '$file' is $space_count"
 ```bash copy
 #!/bin/bash
 
-# Get the input file name
-file=$1
+# Get user input for file name
+read -p "Enter file name: " file_name
 
-# Check if the file exists
-if [ ! -f $file ]; then
-    echo "File not found."
-    exit 1
+# Check if file exists
+if [[ ! -f "$file_name" ]]; then
+  echo "Error: File $file_name does not exist."
+  exit 1
 fi
 
-# Count the number of words in the file
-word_count=$(cat $file | tr -d ' \t\n' | wc -w)
+# Count number of words in file
+word_count=$(tr -d '\n' < "$file_name" | tr -s ' ' | wc -w)
 
-# Print the result
-echo "The number of words in the file '$file' is $word_count"
+# Display result
+echo "Number of words in file $file_name: $word_count"
 
 ```
 
@@ -204,46 +203,42 @@ echo "The number of words in the file '$file' is $word_count"
 ```bash copy
 #!/bin/bash
 
-# Get the input file name
-file=$1
+# Get user input for file name
+read -p "Enter file name: " file_name
 
-# Check if the file exists
-if [ ! -f $file ]; then
-    echo "File not found."
-    exit 1
+# Check if file exists
+if [[ ! -f "$file_name" ]]; then
+  echo "Error: File $file_name does not exist."
+  exit 1
 fi
 
-# Count the number of words in the file
+# Count number of words in file
 word_count=0
-while IFS= read -r line
-do
-  word_count=$(($word_count + $(echo $line | tr -sc 'A-Za-z0-9' ' ' | wc -w)))
-done < $file
+while read -r word; do
+  (( word_count++ ))
+done < <(tr -d '\n' < "$file_name" | tr -s ' ' | sed -e 's/^ *//' -e 's/ *$//' | tr ' ' '\n')
 
-# Print the result
-echo "The number of words in the file '$file' is $word_count"
+# Display result
+echo "Number of words in file $file_name: $word_count"
 
 ```
 
 #### 11 Write a Shell script, which counts the number of characters in a file, without taking into consideration the blank space, tab spaces and the newline characters using WC.
 
 ```bash copy
-#!/bin/bash
+read -p "Enter file name: " file_name
 
-# Get the input file name
-file=$1
-
-# Check if the file exists
-if [ ! -f $file ]; then
-    echo "File not found."
-    exit 1
+# Check if file exists
+if [[ ! -f "$file_name" ]]; then
+  echo "Error: File $file_name does not exist."
+  exit 1
 fi
 
-# Count the number of characters in the file
-char_count=$(cat $file | tr -d ' \t\n' | wc -m)
+# Count number of characters in file
+char_count=$(tr -d '\n\t ' < "$file_name" | wc -c)
 
-# Print the result
-echo "The number of characters in the file '$file' is $char_count"
+# Display result
+echo "Number of characters in file $file_name: $char_count"
 
 ```
 
@@ -252,23 +247,25 @@ echo "The number of characters in the file '$file' is $char_count"
 ```bash copy
 #!/bin/bash
 
-# Get the input file name
-file=$1
+# Get user input for file name
+read -p "Enter file name: " file_name
 
-# Check if the file exists
-if [ ! -f $file ]; then
-    echo "File not found."
-    exit 1
+# Check if file exists
+if [[ ! -f "$file_name" ]]; then
+  echo "Error: File $file_name does not exist."
+  exit 1
 fi
 
-# Count the number of characters in the file
+# Count number of characters in file
 char_count=0
-while IFS= read -r line
-do
-  char_count=$(($char_count + $(echo $line | tr -dc 'A-Za-z0-9' | wc -c)))
-done < $file
+while IFS= read -r char; do
+  if [[ ! -z "$char" ]]; then
+    (( char_count++ ))
+  fi
+done < "$file_name"
 
-# Print the result
-echo "The number of characters in the file '$file' is $char_count"
+# Display result
+echo "Number of characters in file $file_name: $char_count"
+ho "The number of characters in the file '$file' is $char_count"
 
 ```
