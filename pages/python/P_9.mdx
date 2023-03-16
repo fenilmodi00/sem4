@@ -135,3 +135,38 @@ con.commit()
 con.close()
 ```
 ### 5 Write a python code to update experience of doctors.
+```py filename="P8_5.py" copy
+import mysql.connector
+con=mysql.connector.connect(host='localhost',database='test',user='ro
+ot',password='bhavy@15')
+cur=con.cursor()
+cur.execute('update doctor_details set Experienve=5 where
+Doctor_Id=103')
+cur.execute('update doctor_details set Experienve=10 where
+Doctor_Id=106')
+cur.execute('update doctor_details set Experienve=15 where
+Doctor_Id=101')
+con.commit()
+con.close()
+```
+### 6 Write a python code to drop table ‘hospital_details’.
+```py filename="P9_6.py" copy
+import mysql.connector
+con=mysql.connector.connect(host='localhost',database='test',user='root',pass
+word='bhavy@15')
+cur=con.cursor()
+cur.execute('drop table doctor_details')
+cur.execute('show tables')
+for i in cur:
+print(i)
+con.close()
+```
+### 7 Write a python code to create in memory database and tableusing sqlite3 database engine.
+```py filename="98_7.py" copy
+import sqlite3
+con=sqlite3.connect('test.db')
+cur=con.cursor()
+cur.execute('create table hospital_details(Hospital_Id int, Hospital_Name
+varchar(20),Bed_count int)')
+con.close()
+```
