@@ -199,110 +199,62 @@ private static int partition(int[] arr, int low, int high) {
 ````
 ![comop](https://sem4.vercel.app/images/comp-3.png)
 
-### 4 Implement a function of sequential search and count the steps executed by function on various inputs for best case and worst case. Also write complexity in each case and draw a comparative chart.
+### 5 Implement a function of sequential search and count the steps executed by function on various inputs for best case and worst case. Also write complexity in each case and draw a comparative chart.
 ````java copy
-public static int sequentialSearch(int[] arr, int target) {
-    for (int i = 0; i < arr.length; i++) {
-        if (arr[i] == target) {
-            return i;
-        }
-    }
-    return -1;
-}
-````
-![comp-4](https://sem4.vercel.app/images/comp-4.png)
-
-### 5 Implement a function of binary search and count the steps executed by function on various inputs for best case and worst case. Also write complexity in each case and draw a comparative chart.
-````c copy
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
-int count=0; 
-void bubble(int a[], int n) 
-{     
-			int i, j, temp; 
-for (i = 0; i< n; i++) 
-{         
-				for (j = i + 1; j < n; j++) 
-		{             
-					if (a[j] < a[i]) 
-			{                 
-						temp = a[i];                 
-						a[i] = a[j];                 
-						a[j] = temp; 
-			} 
-		} 
-	} 
-} 
-int binarySearch(int arr[], int l, int r, int x) 
-{     
-			while (r >= l) 
-			{         
-				count++;         
-				int mid = l + (r - l) / 2;         
-				count++; 
-		if (arr[mid] == x) 
-		{ 
-			count++;             
-					count++;             
-					return mid; 
-		}         
-				else if (arr[mid] > x) 
-		{ 
-			count++;             
-					count++;             
-					r=mid-1; 
-		}         
-				else         
-				{ 
-					l=mid +1;             
-					count++; 
-		}     
-			}     
-			count++;     
-			return -1; 
-}  
-int main(void) 
-{     
-			clock_t start, 
-			end;     
-			double time_taken;     
-			time_t t;     
-			int n = printf("please enter the range: ");     
-			scanf("%d", &n);     
-			int arr[n];     
-			srand((unsigned)time(&t));     
-			printf("Random Data: ");     	
-			for (int i = 0; i< n; i++) 
-	{         
-				arr[i] = rand() % 100; 
-		printf("%d ", arr[i]); 
-	}     
-			bubble(arr,n);     
-			printf("\nSorted Data: ");     
-			for (int i = 0; i< n; i++) 
-	{         
-				printf("%d ", arr[i]); 
-	}     
-			int x ;
-			printf("\nEnter the element you want to search: ");     
-			scanf("%d",&x);     
-			start=clock(); 
-	int result = binarySearch(arr, 0, n - 1, x); 
-	if(result == -1) 
-	{         
-				printf("Element is not present in array"); 
-	}     
-			else
-			{ 
-		printf("Element is present at index %d", result); 
-	}     
-			end=clock();     
-			time_taken = ((double) (end - start)) / CLOCKS_PER_SEC;     
-			printf("\ntime taken: %f ",time_taken);     
-			printf("\nNumber of steps are: %d ", count); 
+void countingSort(int arr[], int n) {
+ int max_val = arr[0];
+ for(int i = 1; i < n; i++) {
+ if(arr[i] > max_val) {
+ max_val = arr[i];
+ }
+ }
+ int size = max_val + 1;
+ int count[size];
+ for(int i = 0; i < size; i++) {
+ count[i] = 0;
+ }
+ for(int i = 0; i < n; i++) {
+ count[arr[i]]++;
+ }
+ int sorted[n];
+ int j = 0;
+ for(int i = 0; i <= max_val; i++) {
+ while(count[i] > 0) {
+ sorted[j] = i;
+ count[i]--;
+ j++;
+ }
+ }
+  for(int i = 0; i < n; i++) {
+ arr[i] = sorted[i];
+ }
 }
-
+void printArr(int arr[], int n) {
+ printf("[");
+ for(int i = 0; i < n; i++) {
+ printf("%d ", arr[i]);
+ }
+ printf("]");
+}
+int main() {
+ int size;
+ printf("Rathod Yuvraj - 21012011129");
+ printf("Enter the size of the array: ");
+ scanf("%d", &size);
+ int arr[size];
+ printf("Enter %d integers:\n", size);
+ for(int i = 0; i < size; i++) {
+ scanf("%d", &arr[i]);
+ }
+ printf("Data before sorting: ");
+ printArr(arr, size);
+ countingSort(arr, size); 
+  printf("\nData after sorting: ");
+ printArr(arr, size);
+ return 0;
+} 
 
 ````
 ![comp5](https://sem4.vercel.app/images/comp5.png)
@@ -310,93 +262,81 @@ int main(void)
 ### 6 Implement program for randomized version of quick sort and compare its performance with normal version of quick sort using steps count on various number of inputs.
 #### 1 randomized version for quickSort
 ```c copy
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-int sc = 0; 
-int partition(int a[], 
-int start, int end) 
-{     
-int pivotIndex = start + rand()%(end - start+ 1);
-//generates a random number as a pivot     
-sc++;     
-int pivot = a[end]; // pivot element     
-sc++;     
-int i = (start - 1);     
-sc++;     
-pivot = a[pivotIndex];     
-sc++;     
-int temp;     
-sc++;     
-temp = a[pivotIndex];     
-sc++;     
-a[pivotIndex] = a[end];     
-sc++;     
-a[end] = temp;     
-sc++; 
-	for (int j = start; j <= end - 1; j++,sc++)     
+  #include <stdio.h>
+void knapsack(int n, float weight[], float profit[], float capacity)
+{
+ float x[20], tp = 0;
+ int i, j, k;
+ k = capacity;
+ for (i = 0; i < n; i++){
+ x[i] = 0.0;
+ }
+ printf("\nthe result is:- ");
+ for (i = 0; i < n; i++)
+ {
+ if (weight[i] > k)
+ break;
+ else
+ {
+ x[i] = 1.0;
+ int p = profit[i];
+ tp = tp + profit[i];
+ k = k - weight[i];
+ printf("%f * %d +\t ", x[i],p);
+ }
+ }
+ if (i < n)
+ x[i] = k / weight[i];
+ tp = tp + (x[i] * profit[i]);
+ int p = profit[i];
+ printf("%f * %d\t ", x[i],p);
+ printf("\nmaximum profit is: %f", tp);
+}
+int main()
 { 
-// If current element is smaller than the pivot         
-if (a[j] < pivot) 
-		{	
-i++; // increment index of smaller element           sc++;             
-int t = a[i];             
-sc++;             	
-a[i] = a[j];             
-sc++;             
-a[j] = t;             
-sc++; 
-		}     
-} 
-int t = a[i + 1];     
-sc++; 
-a[i + 1] = a[end];     
-sc++; 
-a[end] = t;     
-sc++;     
-return (i + 1);     
-sc++; 
-}  
-int quick(int a[], int start, int end)/* a[] = array to be sorted, start = 
-Starting index, end = Ending index */ 
-{     
-if (start < end) 
-	{         
-sc++;         
-int p = partition(a, start, end); 
-// p is the partitioning index         
-sc++;         
-quick(a, start, p - 1);         
-quick(a, p + 1, end); 
-	} 
-}  
-int main() 
-{     
-int n;     
-clock_tstart,end;     
-double time_taken;     
-time_t t;     
-printf("Enter no of elements in array : ");     
-scanf("%d", &n);     
-int a[n];     
-srand((unsigned) time(&t));     
-printf("Unsorted Array : \n");     
-for (int i = 0; i< n; i++) 
-	{  
-		a[i] = rand() % 100;         
-printf("%d ", a[i]); 
-	} 
-	start = clock();     
-quick(a, 0, n - 1); 
-	printf("\nSorted Array : \n");     
-for (int i = 0; i< n; i++) 
-	{         
-printf("%d ", a[i]); 
-	}     
-end = clock();     
-time_taken = ((double) (end - start)) / CLOCKS_PER_SEC;   printf("\nTime taken : %f", time_taken); 
-	printf("\nSteps count : %d",sc); 
-} 
+  printf("Rathod Yuvraj - 21012011129\n");
+
+ int num, i, j;
+ float weight[20], profit[20], capacity;
+ float ratio[20], temp;
+ printf("\nenter the no of object:-");
+ scanf("%d", &num);
+ printf("\nenter the weight and profit of each object:-\n ");
+ for (i = 0; i < num; i++)
+ {
+ printf("weight[%d] :",i+1);
+ scanf("%f", &weight[i]);
+ printf("profit[%d] :",i+1);
+ scanf("%f", &profit[i]);
+ }
+ printf("\nEnter the capacityacity of knapsack:- ");
+ scanf("%f", &capacity);
+ for (i = 0; i < num; i++)
+ {
+ ratio[i] = profit[i] / weight[i];
+ printf("profit / weight ratio for object %d is %f \n",i+1,ratio[i]);
+ }
+ for (i = 0; i < num; i++)
+ {
+ for (j = i + 1; j < num; j++)
+ {
+ if (ratio[i] < ratio[j])
+ {
+ temp = ratio[j];
+ ratio[j] = ratio[i];
+ ratio[i] = temp;
+ temp = weight[j];
+ weight[j] = weight[i];
+ weight[i] = temp;
+ temp = profit[j];
+ profit[j] = profit[i];
+ profit[i] = temp; 
+ }
+ }
+ }
+ knapsack(num, weight, profit, capacity);
+ return (0);
+}
 
 ```
 ![comp6](https://sem4.vercel.app/images/comp6.png)
@@ -404,154 +344,229 @@ time_taken = ((double) (end - start)) / CLOCKS_PER_SEC;   printf("\nTime taken :
 
 ### 7 Implement program of Counting Sort
 ```c copy
-#include <stdio.h>
+ #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
-int scount = 0; 
-int getMax(int a[], int n) 
-{     
-    int max = a[0];     
-scount++;     
-    for (int i = 1; i< n; i++, scount++) 
-    {         
-        if (a[i] > max) 
-        {             
-            max = a[i];             
-scount++; 
-        }     
-
-    }     
-    return max;     
-scount++; 
-}  
-void countSort(int a[], int n) // function to perform counting sort 
-{     
-    int output[n + 1];     
-scount++;     
-    int max = getMax(a, n);     
-scount++;     
-    int count[max + 1]; // create count array with size [max+1]     
-
-scount++; 
-    for (int i = 0; i<= max; ++i,scount++) 
-    { 
-        count[i] = 0; // Initialize count array with all zeros         
-scount++; 
-    }      
-    for (int i = 0; i< n; i++,scount++) // Store the count of each element 
-    { 
-        count[a[i]]++;         
-scount++; 
-    }      
-    for (int i = 1; i<= max; i++,scount++) 
-    { 
-        count[i] += count[i - 1];         
-scount++; // find cumulative frequency 
-    }     
-    for (int i = n - 1; i>= 0; i--,scount++) 
-    {         
-        output[count[a[i]] - 1] = a[i];         
-scount++;         
-        count[a[i]]--;         
-scount++; // decrease count for same numbers 
-    }     
-    for (int i = 0; i< n; i++,scount++) 
-    {         
-        a[i] = output[i];         
-scount++; // store the sorted elements into main array 
-    } 
-
-} 
-int main() 
-{     
-    int sz;     
-clock_t start, end;     
-    double time_taken;     
-time_t t;     
-printf("Enter the size of array: ");     
-scanf("%d", &sz);     
-    int randArray[sz], i;     
-srand((unsigned)time(&t));     
-    for (i = 0; i<sz; i++) 
-    {         
-randArray[i] = rand() % 100; 
-    }     
-printf("\nElements of the array: ");     
-    for (i = 0; i<sz; i++) 
-    {         
-printf("%d ", randArray[i]); 
-    }     
-    start = clock();     
-countSort(randArray, sz);     
-printf("\nAfter sorting array elements are :");     
-    for (i = 0; i<sz; i++) 
-    { 
-printf("%d ", randArray[i]); 
-    }     
-    end = clock();     
-time_taken = ((double)(end - start)) / CLOCKS_PER_SEC;     
-printf("\nTime taken : %f", time_taken);     
-printf("\nnumber of steps taken: %d ",scount);   
+#define MAX_COINS 50
+#define MAX_COST 1000
+void sort(int array[], int size) {
+ for (int step = 0; step < size - 1; ++step) {
+ for (int i = 0; i < size - step - 1; ++i) {
+ if (array[i] > array[i + 1]) {
+ int temp = array[i];
+ array[i] = array[i + 1];
+ array[i + 1] = temp;
+ }
+ }
+ }
 }
+void findMin(int coins[], int n, int cost) {
+ int coinList[MAX_COINS] = { 0 };
+ int i, k = 0;
+ for (i = n - 1; i >= 0; i--) {
+ while (cost >= coins[i]) {
+ cost -= coins[i];
+ coinList[k++] = coins[i];
+ }
+ }
+printf("\nMinimum number of coins required to make the given amount: %d\n", k);
+ printf("The coins used to make the amount are: ");
+ for (i = 0; i < k; i++) { 
+ printf("%d ", coinList[i]);
+ }
+ printf("\n");
+ return;
+}
+int main() {
+ int n, cost, coins[MAX_COINS];
+ printf("rathod Yuvraj - 21012011129\n");
+ printf("Enter the number of available type of coins : ");
+ scanf("%d", &n);
+ printf("Enter the value of each coin: ");
+ for (int i = 0; i < n; i++) {
+ scanf("%d", &coins[i]);
+ }
+ sort(coins,n);
+printf("Enter the cost for which you want to find the minimum number of coins required: ");
+ scanf("%d", &cost);
+ findMin(coins, n, cost);
+ return 0;
+} 
+
 ```
 
 ### 8 Implement Program for fractional knapsack using Greedy design technique
-```java copy
-public static double fractionalKnapsack(int[] wt, int[] val, int capacity) {
-    double maxValue = 0;
-    Item[] items = new Item[wt.length];
-    for (int i = 0; i < wt.length; i++) {
-        items[i] = new Item(wt[i], val[i]);
-    }
-    Arrays.sort(items, (i1, i2) -> {
-        double r1 = (double) i1.value / i1.weight;
-        double r2 = (double) i2.value / i2.weight;
-        return -Double.compare(r1, r2);
-    });
-    int currentWeight = 0;
-    for (Item item : items) {
-        if (currentWeight + item.weight <= capacity) {
-            maxValue += item.value;
-            currentWeight += item.weight;
-        } else {
-            int remaining = capacity - currentWeight;
-            maxValue += item.value * ((double) remaining / item.weight);
-            break;
-        }
-    }
-    return maxValue;
-}
+```C copy
+#include <stdio.h>
+#include <stdlib.h>
+int main()
+{
+ int m, n, i, j;
+ printf("Rathod Yuvraj - 21012011129 \n");
+ printf("Enter the amount of which you want change: ");
+ scanf("%d", &m);
+ printf("Enter the number of determinants: ");
+ scanf("%d", &n);
+ int c[n + 1][m + 1], dc[n + 1];
+ printf("Enter the determinants: ");
+ dc[0] = 0;
+ for (i = 1; i < n + 1; i++)
+ scanf("%d", &dc[i]);
+ for (i = 0; i < n + 1; i++)
+ {
+ for (j = 0; j <= m; j++)
+ c[i][j] = 0;
+ }
+ for (i = 0; i < n + 1; i++)
+ c[i][0] = 0;
+ for (i = 0; i < m + 1; i++)
+ {
+ c[0][i] = i;
+ }
+ for (i = 1; i < n + 1; i++)
+ {
+ for (j = 1; j < m + 1; j++)
+ {
+ if (dc[1] > c[0][j])
+ c[i][j] = 0;
+ else if (dc[i] <= j)
+ {
+ if ((c[i][j - dc[i]] + 1) < c[i - 1][j])
+ c[i][j] = (c[i][j - dc[i]] + 1);
+ else
+ c[i][j] = c[i - 1][j];
+ }
+ else
+ c[i][j] = c[i - 1][j];
+ }
+ }
+ printf("\nThe change you get is: ");
+ i = n;
+ j = m;
+ while (i != 1)
+ {
+ if (c[i][j] == c[i - 1][j])
+ i = i - 1;
+ else
+ {
+ j = j - dc[i];
+ printf(" %d ", dc[i]);
+ }
+ } 
+ printf("\n\n");
+ return 0;
+} 
+
 ```
 
 ### 9 Implement Program for “Making Change” using Greedy design technique
-```
-public static int makeChange(int[] coins, int change) {
-    int numCoins = 0;
-    for (int i = coins.length - 1; i >= 0; i--) {
-        while (change >= coins[i]) {
-            change -= coins[i];
-            numCoins++;
-        }
-    }
-    return numCoins;
+```C copy
+#include <stdio.h>
+int max(int a, int b)
+{
+ return (a > b) ? a : b;
 }
+int knapSack(int W, int wt[], int val[], int n)
+{
+ int i, w;
+ int K[n + 1][W + 1];
+ for (i = 0; i <= n; i++)
+ {
+ for (w = 0; w <= W; w++)
+ {
+ if (i == 0 || w == 0)
+ K[i][w] = 0;
+ else if (wt[i - 1] <= w)
+ K[i][w] = max(val[i - 1] + K[i - 1][w - wt[i - 1]], K[i - 1][w]);
+ else
+ K[i][w] = K[i - 1][w];
+ }
+ }
+ return K[n][W];
+}
+int main()
+{
+ int n, W;
+ printf("rathod Yuvraj - 21012011129 \n");
+ printf("Enter the number of items: ");
+ scanf("%d", &n);
+ int val[n], wt[n]; 
+ printf("Enter the values of the items: ");
+ for (int i = 0; i < n; i++)
+ scanf("%d", &val[i]);
+ printf("Enter the weights of the items: ");
+ for (int i = 0; i < n; i++)
+ scanf("%d", &wt[i]);
+ printf("Enter the maximum capacity of the knapsack: ");
+ scanf("%d", &W);
+ int result = knapSack(W, wt, val, n);
+ printf("The maximum profit is:%d\n", result);
+ return 0;
+} 
 
 ```
 ### 10 Implement Program for “Making Change” using Dynamic Programming
-```java copy
-public static int makeChange(int[] coins, int change) {
-    int[] dp = new int[change + 1];
-    Arrays.fill(dp, Integer.MAX_VALUE);
-    dp[0] = 0;
-    for (int i = 1; i <= change; i++) {
-        for (int j = 0; j < coins.length; j++) {
-            if (coins[j] <= i) {
-                dp[i] = Math.min(dp[i], dp[i - coins[j]] + 1);
-            }
-        }
-    }
-    return dp[change];
+```C copy
+#include <stdio.h>
+#include <math.h>
+#include<stdlib.h>
+int board[20], count;
+void print(int n) {
+ int i, j;
+ printf("\nSolution %d:\n\n", ++count);
+ for (i = 1; i <= n; ++i) {
+ printf("\t%d", i);
+ }
+ for (i = 1; i <= n; ++i) {
+ printf("\n%d", i);
+ for (j = 1; j <= n; ++j) { // for nxn board
+ if (board[i] == j)
+ printf("\tQ"); //queen at i,j position
+ else
+ printf("\t-"); //empty slot 
+  }
+ }
 }
+int place(int row, int column) {
+ int i;
+ for (i = 1; i <= row - 1; ++i) {
+ // checking column and diagonal conflicts
+ if (board[i] == column)
+ return 0; 
+  else if (abs(board[i] - column) == abs(i - row))
+ return 0;
+ }
+ return 1; // no conflicts
+}
+void queen(int row, int n) {
+ int column;
+ for (column = 1; column <= n; ++column) {
+ if (place(row, column)) {
+ board[row] = column; // no conflicts so place queen
+ if (row == n) // dead end
+ print(n); // printing the board configuration
+ else // try queen with next position
+ queen(row + 1, n);
+ }
+ }
+}
+int main() {
+ int n;
+ printf("Rathod Yuvraj - 21012011129\n");
+ printf(" - N Queens Problem Using Backtracking -\n");
+ printf("Enter number of Queens: ");
+ scanf("%d", &n);
+ if (n < 4) {
+ printf("Solution does not exist for n < 4\n");
+ return 0;
+ }
+ queen(1, n);
+ if (count == 0) {
+ printf("Solution does not exist\n"); 
+  }
+ return 0;
+} 
+
+
 ```
 
 
