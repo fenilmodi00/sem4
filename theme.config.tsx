@@ -17,7 +17,7 @@ const config: DocsThemeConfig = {
   },
 
   
-  docsRepositoryBase: 'https://github.com/fenilmodi00/sem4',
+  // docsRepositoryBase: 'https://github.com/fenilmodi00/sem4',
 
   faviconGlyph : '🫠',
 
