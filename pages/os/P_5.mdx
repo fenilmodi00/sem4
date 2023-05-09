@@ -3,54 +3,40 @@
 #### 1 Write a Shell script to accept a string as command line argument and reverse the same.
 
 ```bash copy
-#!/bin/bash
-
-# Get the input string
-string=$1
-
-# Reverse the string
-reversed_string=$(echo $string | rev)
-
-# Print the result
-echo "The reversed string of '$string' is '$reversed_string'"
+str="$1" reversed_string="" len=${#str}
+for (( i=$len-1; i>=0; i-- )) do
+reversed_string="$reversed_string${str:$i:1}" done
+echo "$reversed_string"
+cho "The reversed string of '$string' is '$reversed_string'"
 
 ```
 
-#### 3 Write a shell script to calculate the loss percentage of an article, given the cost price and the selling price as command line arguments.
+#### 2 Write a shell script to calculate the loss percentage of an article, given the cost price and the selling price as command line arguments.
 
 ```bash copy
-#!/bin/bash
+if [ $# -ne 2 ]; then
+echo "Usage: ./loss_percentage.sh <cost_price> <selling_price>" exit 1
+fi
 
-# Get the cost price
-cost_price=$1
+cost_price=$1 selling_price=$2
 
-# Get the selling price
-selling_price=$2
+if (( $selling_price > $cost_price )); then profit=$(( $selling_price - $cost_price )) echo "Profit: $profit"
+exit 0 else
+loss=$(( $cost_price - $selling_price )) echo "Loss: $loss"
+fi
 
-# Calculate the loss
-loss=$(echo "($cost_price - $selling_price) / $cost_price * 100" | bc -l)
-
-# Print the result
-echo "The loss percentage is $loss%"
+loss_percentage=$(( $loss * 100 / $cost_price )) echo "Loss percentage: $loss_percentage%"
 
 ```
 
 #### 3 Write a shell script to accept the name of the user and check out if the same has logged in or not
 
 ```bash copy
-#!/bin/bash
+echo "Please enter your username:" read username
 
-# Get the input user name
-username=$1
-
-# Check if the user is logged in
-logged_in=$(who | grep $username | wc -l)
-
-# Print the result
-if [ $logged_in -eq 0 ]; then
-  echo "User '$username' is not logged in."
-else
-  echo "User '$username' is logged in."
+if id "$username" >/dev/null 2>&1; then
+echo "User '$username' exists on the system." else
+echo "User '$username' does not exist on the system."
 fi
 
 ```
@@ -58,113 +44,77 @@ fi
 #### 4 Write a shell script to check whether the file whose name is scanned exists and readable.
 
 ```bash copy
-#!/bin/bash
+echo "Please enter the filename:" read filename
 
-# Get the input file name
-file=$1
+if [ -f "$filename" ]; then
+echo "File '$filename' exists on the system."
 
-# Check if the file exists
-if [ ! -f $file ]; then
-    echo "File not found."
-    exit 1
-fi
+if [ -r "$filename" ]; then
+echo "File '$filename' is readable."
+ else
+echo "File '$filename' is not readable."
+fi else
+echo "File '$filename' does not exist on the system."
+Fi
 
-# Check if the file is readable
-if [ ! -r $file ]; then
-    echo "File is not readable."
-    exit 1
-fi
-
-echo "File exists and is readable."
 ```
 
 #### 5 Write a shell script to check if the input string is a palindrome.
 
 ```bash copy
-#!/bin/bash
-
-# Get the input string
-string=$1
-
-# Reverse the string
-reversed_string=$(echo $string | rev)
-
-# Check if the string is a palindrome
-if [ "$string" = "$reversed_string" ]; then
-  echo "The string '$string' is a palindrome."
+echo "Please enter a string:" read input_string
+reverse_string=$(echo "$input_string" | rev) if [ "$input_string" = "$reverse_string" ]; then
+echo "The string '$input_string' is a palindrome."
 else
-  echo "The string '$string' is not a palindrome."
+echo "The string '$input_string' is not a palindrome."
 fi
+
 
 ```
 
 #### 6 . Write a shell script to accept a number and a word as command line arguments and print the word the given number of times on each line.
 
 ```bash copy
-#!/bin/bash
+if [ $# -ne 2 ]; then
+echo "Usage: ./print_word.sh <number> <word>" exit 1
+fi
 
-# Get the input number
-num=$1
+number=$1 word=$2
 
-# Get the input word
-word=$2
-
-# Print the word the given number of times
-for ((i=1; i<=$num; i++))
-do
-  echo $word
+for (( i=1; i<=$number; i++ )); do echo "$word"
 done
+
 
 ```
 
 #### 7 Write a shell script to find the file or directory with the maximum size in the current directory
 
 ```bash copy
-#!/bin/bash
+max_size=$(du -hs * | sort -rh | head -n 1)
 
-# Initialize the max_size variable
-max_size=0
-
-# Initialize the max_file variable
-max_file=""
-
-# Iterate through all files and directories in the current directory
-for file in *
-do
-    # Get the size of the current file/directory
-    size=$(du -s $file | awk '{print $1}')
-
-    # Check if the size is greater than the current max size
-    if [ $size -gt $max_size ]; then
-        max_size=$size
-        max_file=$file
-    fi
-done
-
-# Print the result
-echo "The largest file/directory in the current directory is $max_file with a size of $max_size KB"
+echo "The file or directory with the maximum size in the current directory is:" echo "$max_size"
 
 ```
 
 #### 8 Write a shell script to accept two filenames and check if both exist. If the second filename exists, then the contents of the first filename should be appended to it. If the second filename does not exist then create a newfile with the contents of the first file
 
 ```bash copy
-#!/bin/bash
-
-first_file=$1
-second_file=$2
-
-if [ -f "$first_file" ]; then
-  if [ -f "$second_file" ]; then
-    cat "$first_file" >> "$second_file"
-    echo "Appended contents of $first_file to $second_file"
-  else
-    cp "$first_file" "$second_file"
-    echo "Created new file $second_file with contents of $first_file"
-  fi
-else
-  echo "Error: $first_file does not exist"
+if [ $# -ne 2 ]; then
+echo "Usage: ./append_file.sh <filename1> <filename2>" exit 1
 fi
+
+filename1=$1 filename2=$2
+
+if [ ! -f "$filename1" ]; then
+echo "File '$filename1' does not exist." exit 1
+fi
+
+if [ -f "$filename2" ]; then
+cat "$filename1" >> "$filename2"
+echo "The contents of '$filename1' were appended to '$filename2'." else
+cp "$filename1" "$filename2"
+echo "A new file '$filename2' was created with the contents of '$filename1'." fi
+
 
 ```
 
@@ -173,19 +123,13 @@ fi
 ```bash copy
 #!/bin/bash
 
-if [ $# -eq 0 ]; then
-    number=50
+if [ $# -eq 0 ]; then n=50
 else
-    number=$1
-fi
-
-sum=0
-for ((i=1;i<=number;i++))
-do
-    sum=$((sum + i))
+n=$1 fi sum=0
+for (( i=1; i<=$n; i++ )); do sum=$((sum+i))
 done
-
-echo "The sum up to $number is $sum"
+echo "The sum up to $n is: $sum"
+cho "The sum up to $number is $sum"
 
 ```
 
@@ -194,19 +138,16 @@ echo "The sum up to $number is $sum"
 ```bash copy
 #!/bin/bash
 
-num_files=0
-num_dirs=0
+num_files=0 num_directories=0
 
 for file in *; do
-  if [ -f "$file" ]; then
-    num_files=$((num_files + 1))
-  elif [ -d "$file" ]; then
-    num_dirs=$((num_dirs + 1))
-  fi
+# Check if the file is a regular file if [ -f "$file" ]; then num_files=$((num_files+1))
+
+elif [ -d "$file" ]; then num_directories=$((num_directories+1)) fi
 done
 
-echo "Number of files: $num_files"
-echo "Number of directories: $num_dirs"
+echo "Number of ordinary files: $num_files" echo "Number of directories: $num_directories"
+
 ```
 
 #### 11 Write a shell script to accept an alphabet from the user and list all the files/directory starting with that alphabet in the current directory
@@ -219,13 +160,6 @@ read alphabet
 
 echo "Files/directories starting with $alphabet:"
 
-for file in *; do
-  if [[ "$file" == "$alphabet"* ]]; then
-    echo "$file"
-    if [ -x "$file" ]; then
-      ./"$file"
-    fi
-  fi
-done
+read -p "Enter an alphabet: " letter ls -d $letter*
 
 ```

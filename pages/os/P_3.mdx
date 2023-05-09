@@ -5,35 +5,37 @@
 ```bash copy
 #!/bin/bash
 
-echo "Enter cost price: "
-read cost_price
-
-echo "Enter selling price: "
-read selling_price
-
-if (( selling_price < cost_price )); then
-  loss=$(( cost_price - selling_price ))
-  loss_percentage=$(( loss * 100 / cost_price ))
-  echo "Loss percentage: $loss_percentage%"
-else
-  echo "No loss incurred"
-fi
+echo Enter Cost Price :
+read cp
+echo Enter Sell Price :
+read sp
+v1=`expr $cp - $sp`
+v2=`expr $v1 \* 100`
+v3=`expr $v2 / $cp`
+echo Your lost percentage is $v3%.
 ```
 
 #### 2 Write a shell script to accept numbers below 50 and to display the square of each. This should continue as long as the user wishes.
 
 ```bash copy
 
-while true; do
-    read -p "Enter a number below 50 (or 'exit' to quit): " num
-    if [ "$num" = "exit" ]; then
-        break
-    fi
-    if (( num < 50 )); then
-        echo "The square of $num is $((num*num))"
-    else
-        echo "Number should be below 50!"
-    fi
+while [ 1 ]
+do
+echo Enter Number less than 50 :
+read no
+while [ $no -gt 50 ]
+do
+echo Enter Number less than 50 :
+read no
+done
+v1=`expr $no \* $no`
+echo Square of $no is $v1.
+echo Do you want to Exit \? E-Exit
+read ch
+if [ $ch = "e" -o $ch = "E" ]
+then
+exit
+fi
 done
 ```
 
@@ -51,23 +53,16 @@ echo "\$50"
 ```bash copy
 #!/bin/bash
 
-# Get the input string
-read -p "Enter a string to search: " search_string
-
-# Get the input file name
-read -p "Enter a file name to search in: " file
-
-# Check if the file exists
-if [ ! -f $file ]; then
-   echo "File not found."
-   exit 1
-fi
-
-# Search the file for the input string
-if grep -q $search_string $file; then
-   echo "The string '$search_string' was found in the file '$file'."
+echo Enter string you want to search :
+read a
+echo Enter file name :
+read b
+c=`grep $a $b`
+if [ $? -eq 0 ]
+then
+echo $a is Present in file $b.
 else
-   echo "The string '$search_string' was not found in the file '$file'."
+echo $a is not Present in file $b.
 fi
 ```
 
@@ -76,11 +71,9 @@ fi
 ```bash copy
 #!/bin/bash
 
-# Get the input command
-read -p "Enter a command to execute: " cmd
-
-# Execute the command
-$cmd
+echo Enter any Command to Execute:
+read command
+$command
 
 ```
 
@@ -90,17 +83,17 @@ $cmd
 #!/bin/bash
 
 # Get the input month
-read -p "Enter a month: " month
-
-# Check the input month
-case $month in
- Jan|Janu|Janua|January)
-   echo "January"
-   ;;
- *)
-   echo "Invalid input"
-   ;;
+echo Enter the name month:
+read a
+case $a in
+jan|janu|janua|january)
+echo January
+;;
+*)
+echo Invalid Input
+;;
 esac
+
 
 ```
 

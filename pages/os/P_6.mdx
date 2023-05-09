@@ -5,79 +5,91 @@
 ```bash copy
 #!/bin/bash
 
-# Accept a number as input
-echo "Enter a number:"
-read num
+echo "Enter a number: "
+read n
 
-# Initialize a variable to store the sum
 sum=0
+echo "List of odd numbers below $n:"
 
-# Iterate through all numbers below the input number
-for i in $(seq 1 $((num-1))); do
-  # Check if the current number is odd
-  if [ $((i % 2)) -ne 0 ]; then
-    # Print the current number
+for (( i=1; i<n; i+=2 ))
+do
     echo $i
-    # Add the current number to the sum
     sum=$((sum+i))
-  fi
 done
 
-# Print the sum of all odd numbers
-echo "Sum of all odd numbers below $num: $sum"
+echo "Sum of all odd numbers: $sum"
+
 ```
 
 #### 2 Write a shell script to arrange numbers in ascending or descending order as per the user choice.
 
 ```bash copy
-#!/bin/bash
+echo "Enter the number of elements: "
+read n
 
-# Accept numbers as input
-echo "Enter numbers separated by spaces:"
-read -a numbers
+echo "Enter the elements: "
+for (( i=0; i<n; i++ ))
+do
+    read a[$i]
+done
 
-# Ask the user for their sort order preference
-echo "Enter 1 for ascending order or 2 for descending order:"
-read order
+echo "Enter 1 to sort in ascending order or 2 to sort in descending order: "
+read choice
 
-if [ $order -eq 1 ]; then
-  # Sort the numbers in ascending order
-  sorted=($(printf "%s\n" "${numbers[@]}" | sort -n))
-  echo "Ascending order: ${sorted[*]}"
-elif [ $order -eq 2 ]; then
-  # Sort the numbers in descending order
-  sorted=($(printf "%s\n" "${numbers[@]}" | sort -nr))
-  echo "Descending order: ${sorted[*]}"
+if [ $choice -eq 1 ]
+then
+    for (( i=0; i<n-1; i++ ))
+    do
+        for (( j=i+1; j<n; j++ ))
+        do
+            if [ ${a[i]} -gt ${a[j]} ]
+            then
+                temp=${a[i]}
+                a[i]=${a[j]}
+                a[j]=$temp
+            fi
+        done
+    done
+    echo "Elements in ascending order: ${a[@]}"
+elif [ $choice -eq 2 ]
+then
+    for (( i=0; i<n-1; i++ ))
+    do
+        for (( j=i+1; j<n; j++ ))
+        do
+            if [ ${a[i]} -lt ${a[j]} ]
+            then
+                temp=${a[i]}
+                a[i]=${a[j]}
+                a[j]=$temp
+            fi
+        done
+    done
+    echo "Elements in descending order: ${a[@]}"
 else
-  echo "Invalid choice. Please enter 1 for ascending or 2 for descending."
+    echo "Invalid choice."
 fi
+
 
 ```
 
 #### 3 Write a shell script to check whether the entered number is Armstrong or not
 
 ```bash copy
-#!/bin/bash
-
-# Accept a number as input
 echo "Enter a number:"
 read num
-# Initialize a variable to store the sum
+num_of_digits=${#num}
 sum=0
-# Store the number of digits in the input number
-num_digits=${#num}
-# Iterate through each digit in the input number
-for digit in $(echo $num | grep -o .);
-do
-  # Add the digit raised to the power of the number of digits to the sum
-  sum=$((sum + 10#$digit**num_digits))
+for (( i=0; i<$num_of_digits; i++ )); do
+    digit=${num:$i:1}
+    (( sum += $digit ** $num_of_digits ))
 done
-# Check if the sum is equal to the input number
-if [ $sum -eq $num ]; then
-  echo "$num is an Armstrong number."
+if [[ $sum -eq $num ]]; then
+    echo "$num is an Armstrong number."
 else
-  echo "$num is not an Armstrong number."
+    echo "$num is not an Armstrong number."
 fi
+
 
 ```
 
@@ -85,43 +97,78 @@ fi
 
 ```bash copy
 #!/bin/bash
-
-# Declare and initialize arrays A and B
+# initialize arrays
 A=()
 B=()
 
-# Get input for array A
+# prompt user to enter values for array A
 echo "Enter 10 integers for array A:"
-for i in {1..10}; do
-  read input
-  A+=($input)
+for (( i=0; i<10; i++ )); do
+    read num
+          A+=("$num")
 done
 
-# Get input for array B
+# prompt user to enter values for array B
 echo "Enter 30 integers for array B:"
-for i in {1..30}; do
-  read input
-  B+=($input)
+for (( i=0; i<30; i++ )); do
+    read num
+    B+=("$num")
 done
 
-# Concatenate array A to array B
+# concatenate arrays A and B
 C=( "${A[@]}" "${B[@]}" )
 
-# Ask the user for their sort order preference
-echo "Enter 1 for ascending order or 2 for descending order:"
-read order
+# prompt user to choose sorting algorithm
+echo "Choose a sorting algorithm (1 for bubble sort, 2 for selection sort, 3 for insertion sort):"
+read choice
 
-if [ $order -eq 1 ]; then
-  # Sort the numbers in ascending order
-  sorted=($(printf "%s\n" "${C[@]}" | sort -n))
-  echo "Ascending order: ${sorted[*]}"
-elif [ $order -eq 2 ]; then
-  # Sort the numbers in descending order
-  sorted=($(printf "%s\n" "${C[@]}" | sort -nr))
-  echo "Descending order: ${sorted[*]}"
+# sort the array according to user choice
+if [[ $choice -eq 1 ]]; then
+    # bubble sort
+    for (( i=0; i<${#C[@]}-1; i++ )); do
+        for (( j=0; j<${#C[@]}-1-$i; j++ )); do
+            if [[ ${C[j]} -gt ${C[j+1]} ]]; then
+                # swap elements
+                temp=${C[j]}
+                C[j]=${C[j+1]}
+                C[j+1]=$temp
+            fi
+        done
+    done
+elif [[ $choice -eq 2 ]]; then
+    # selection sort
+    for (( i=0; i<${#C[@]}-1; i++ )); do
+        min=$i
+        for (( j=$i+1; j<${#C[@]}; j++ )); do
+            if [[ ${C[j]} -lt ${C[min]} ]]; then
+                min=$j
+            fi
+        done
+        # swap elements
+        temp=${C[i]}
+        C[i]=${C[min]}
+        C[min]=$temp
+    done
+elif [[ $choice -eq 3 ]]; then
+    # insertion sort
+    for (( i=1; i<${#C[@]}; i++ )); do
+        key=${C[i]}
+        j=$i-1
+        while [[ $j -ge 0 && ${C[j]} -gt $key ]]; do
+            # shift elements
+            C[$j+1]=${C[$j]}
+            (( j-- ))
+        done
+        C[$j+1]=$key
+    done
 else
-  echo "Invalid choice. Please enter 1 for ascending or 2 for descending."
+    echo "Invalid choice."
+    exit 1
 fi
+
+# print the sorted array
+echo "Sorted array:"
+echo "${C[@]}"
 
 ```
 
@@ -129,19 +176,16 @@ fi
 
 ```bash copy
 #!/bin/bash
-
-# Declare and initialize an array
 arr=()
-
-# Get input for the array
-echo "Enter values for the array separated by spaces:"
-read -a arr
-
-# Convert the array to a string and remove duplicate values
+echo "Enter the number of elements: "
+read n
+echo "Enter integers for array:"
+for (( i=0; i<n; i++ )); do
+    read num
+    arr+=("$num")
+done
 arr=($(echo "${arr[@]}" | tr ' ' '\n' | sort -u | tr '\n' ' '))
-
-# Print the array with duplicate values removed
-echo "Array with duplicates removed: ${arr[*]}"
+echo "${arr[@]}"
 
 ```
 
@@ -149,73 +193,89 @@ echo "Array with duplicates removed: ${arr[*]}"
 
 ```bash copy
 #!/bin/bash
-
-# Declare and initialize two arrays
-array1=()
-array2=()
-
-# Get input for array1
-echo "Enter values for array1 separated by spaces:"
-read -a array1
-
-# Get input for array2
-echo "Enter values for array2 separated by spaces:"
-read -a array2
-
-# Add two arrays
-result=("${array1[@]}" "${array2[@]}")
-
-# Print the resulting array
-echo "Resulting array: ${result[*]}"
+array1=(1 2 3)
+array2=(4 5 6)
+len=${#array1[@]}
+sum=()
+for (( i=0; i<$len; i++ )); do
+  result=$(( ${array1[$i]} + ${array2[$i]} ))
+  sum+=($result)
+done
+echo "The sum of the arrays is: ${sum[@]}"
 
 ```
 
 #### 7 . Write a shell script to reverse an array.
 
 ```bash copy
-#!/bin/bash
-
-# Declare and initialize an array
-arr=("h" "e" "l" "l" "o")
-
-# Find the length of the array
-len=${#arr[@]}
-
-# Initialize a new array to store the reversed values
-result=()
-
-# Iterate through the array in reverse order
-for (( i = $len - 1; i >= 0; i-- )); do
-  result+=("${arr[i]}")
+array=(1 2 3 4 5)
+len=${#array[@]}
+reverse=()
+for (( i=$len-1; i>=0; i-- )); do
+  reverse+=(${array[$i]})
 done
+echo "The reversed array is: ${reverse[@]}"
 
-# Print the reversed array
-echo "Reversed array: ${result[*]}"
 
 ```
 
+#### 8.Write a shell script to check whether the entered string is in title case or not. 
+
+```bash copy
+# Read the input string from user
+echo "Enter a string: "
+read string
+
+# Convert the first character of each word to uppercase and store in a new string
+titlecase=$(echo "$string" | awk '{for(i=1;i<=NF;i++){ $i=toupper(substr($i,1,1)) substr($i,2) } print}')
+
+# Compare the original string and the titlecase string
+if [ "$string" == "$titlecase" ]; then
+  echo "The string is in title case."
+else
+  echo "The string is not in title case."
+fi
+
+```
+
+#### 9.	Write a shell script to check whether the scanned word is a uppercase word or not. 
+
+```bash copy
+echo "Enter a word: "
+read word
+
+# Check if the word is in uppercase
+if [[ "$word" == *[[:lower:]]* ]]; then
+  echo "The word is not in uppercase."
+else
+  echo "The word is in uppercase."
+fi
+
+```
 #### 10 Write a shell script to count number of uppercase words in a string.
 
 ```bash copy
 #!/bin/bash
 
-# Accept a string as input
-echo "Enter a string:"
-read str
+echo "Enter a string: "
+read string
 
-# Initialize a variable to store the count
+# Split the string into an array of words
+words=($string)
+
+# Initialize a counter for uppercase words
 count=0
 
-# Iterate through each word in the string
-for word in $str; do
-  # Check if the word is uppercase
-  if [[ "$word" == "${word^^}" ]]; then
-    # If it is, increment the count
-    count=$((count+1))
+# Loop through each word in the array and check if it is in uppercase
+for word in "${words[@]}"; do
+  if [[ "$word" == *[[:lower:]]* ]]; then
+    continue
+  else
+    ((count++))
   fi
 done
 
-# Print the count
-echo "Number of uppercase words in the string: $count"
+# Print the count of uppercase words
+echo "The number of uppercase words in the string is: $count"
 
 ```
