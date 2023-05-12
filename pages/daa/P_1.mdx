@@ -39,24 +39,51 @@ public static int sumUsingRecursion(int N) {
 ### 2 Implement functions to print nth Fibonacci number using iteration and recursive method. Compare the performance of two methods by counting number of steps executed on various inputs. Also draw a comparative chart. (Fibonacci series 1, 1, 2, 3, 5, 8….. Here 8 is the 6th Fibonacci number)
 
 #### 1 Iteration Method
-````java copy 
-public class fibonicii {
-    public static void main(String[] args) {
-        int n1=0,n2=1,n3,i,count=10,count1=0;
-        System.out.print(n1+" "+n2);
-
-        for(i=2;i<count;++i) // count1++;
-        {
-            n3=n1+n2;
-            count1++;
-
-            n1=n2;    count1++;
-            n2=n3;
-            count1++;
-        }
-        System.out.println(" "+n3);
-        System.out.println("count = "+count1);
-    }
+````C copy 
+#include <stdio.h>
+void loop_fibo(int);
+int rec_fibo(int);
+int count_loop=0;
+int count_rec=0;
+int main()
+{
+int n,m=0,i;
+printf("Mehta Manthan 21012021048");
+printf("Enter the value of n:");
+scanf("%d",&n);
+loop_fibo(n);
+printf("\nCount of loop: %d\n",count_loop);
+printf("%d ",rec_fibo(n));
+printf("\nCount of Recursion: %d\n",count_rec);
+return 0;
+}
+void loop_fibo(int n){
+int i,first=0,second=1,result;
+count_loop++;
+for(i=0;i<=n;i++){
+if(i<=1){
+result=i;
+count_loop++;
+}
+else{
+result=first+second;
+first=second;
+second=result;
+count_loop+=3;
+}
+printf("%d ",result);
+}
+}
+int rec_fibo(int n)
+{
+if (n <= 1){
+count_rec++;
+return n;
+}
+else{
+count_rec++;
+return (rec_fibo(n - 1) + rec_fibo(n - 2));
+}
 }
 
 
@@ -78,124 +105,360 @@ public static int fibonacciRecursive(int n) {
 ### 3 Write user defined functions for the following sorting methods and compare their performance by time measurement with random data and Sorted data.
 
 #### 1. Selection Sort
-``` java copy
-public static int[] selectionSort(int[] arr) {
-    for (int i = 0; i < arr.length - 1; i++) {
-        int minIndex = i;
-        for (int j = i + 1; j < arr.length; j++) {
-            if (arr[j] < arr[minIndex]) {
-                minIndex = j;
-            }
-        }
-        int temp = arr[minIndex];
-        arr[minIndex] = arr[i];
-        arr[i] = temp;
-    }
-    return arr;
+```  copy
+#include<stdio.h>
+#include<time.h>
+void selection_sort(int[],int);
+void main(){
+int a[10000],n,i;
+time_t t;
+double time_taken;
+clock_t start,end;
+printf("Manthan Mehta:21012021048\n");
+printf("Enter number of elements:");
+scanf("%d",&n);
+srand((unsigned)time(&t));
+for(i=0;i<n;i++){
+a[i]=rand()%1000;
+}
+start=clock();
+selection_sort(a,n);
+end=clock();
+printf("\nSorted randomly generated elements are:");
+for(i=0;i<n;i++){
+printf("%d ",a[i]);
+}
+time_taken=(double)(end-start)/CLOCKS_PER_SEC;
+printf("\nTime taken by selection sort for random unsorted array: %lf",time_taken);
+for(i=0;i<n;i++){
+a[i]=i+1;
+}
+start=clock();
+selection_sort(a,n);
+end=clock();
+printf("\n\nSorted elements are: ");
+for(i=0;i<n;i++){
+printf("%d ",a[i]);
+}
+time_taken=(double)(end-start)/CLOCKS_PER_SEC;
+printf("\nTime taken by selection sort for sorted array: %lf",time_taken);
+}
+void selection_sort(int a[],int n){
+int i,j,min,temp;
+for(i=0;i<n-1;i++){
+min=i;
+for(j=i+1;j<n;j++){
+if(a[min]>a[j]){
+min=j;
+}
+}
+if(min!=i){
+temp=a[i]; a[i]=a[min];
+a[min]=temp;
+}
+}
 }
 ```
 #### 2. Bubble Sort
-````java copy
-public static int[] bubbleSort(int[] arr) {
-    for (int i = 0; i < arr.length - 1; i++) {
-        for (int j = 0; j < arr.length - i - 1; j++) {
-            if (arr[j] > arr[j + 1]) {
-                int temp = arr[j];
-                arr[j] = arr[j + 1];
-                arr[j + 1] = temp;
-            }
-        }
-    }
-    return arr;
+```` copy
+#include<stdio.h>
+#include<time.h>
+void bubble_sort(int [],int);
+void main()
+{
+int a[10000],n,i;
+time_t t;
+double time_taken;
+clock_t start,end;
+printf("Manthan Mehta:21012021048\n");
+printf("Enter number of elements: ");
+scanf("%d",&n);
+srand((unsigned) time(&t));
+for(i=0;i<n;i++)
+{
+a[i]=rand() % 1000;
+}
+start=clock();
+bubble_sort(a,n);
+end=clock();
+printf("\nSorted randomly generated elements are: ");
+for(i=0;i<n;i++)
+{
+printf("%d ",a[i]);
+}
+time_taken=(double)(end-start)/CLOCKS_PER_SEC;
+printf("\nTime taken by bubble sort for random unsorted array: %lf",time_taken);
+for(i=0;i<n;i++)
+{
+a[i]=i+1;
+}
+start=clock();
+bubble_sort(a,n);
+end=clock();
+printf("\n\nSorted elements are: ");
+for(i=0;i<n;i++)
+{
+printf("%d ",a[i]);
+}
+time_taken=(double)(end-start)/CLOCKS_PER_SEC;
+printf("\nTime taken by bubble sort for sorted array: %lf",time_taken);
+}
+void bubble_sort(int a[],int n)
+{int i,j,temp,flag;
+for(i=0;i<n-1;i++)
+{
+flag=0;
+for(j=0;j<n-1-i;j++)
+{
+if(a[j]>a[j+1])
+{
+temp=a[j];
+a[j]=a[j+1];
+a[j+1]=temp;
+flag=1;
+}
+}
+if(flag==0)
+{
+break;
+}
+}
 }
 
 ````
 #### 3. Insertion Sort
-````java copy
-public static int[] insertionSort(int[] arr) {
-    for (int i = 1; i < arr.length; i++) {
-        int key = arr[i];
-        int j = i - 1;
-        while (j >= 0 && arr[j] > key) {
-            arr[j + 1] = arr[j];
-            j = j - 1;
-        }
-        arr[j + 1] = key;
-    }
-    return arr;
+```` copy
+#include<stdio.h>
+#include<time.h>
+void insertion_sort(int [],int);
+void main()
+{
+int a[10000],n,i;
+time_t t;
+double time_taken;
+clock_t start,end;
+printf("Manthan Mehta:21012021048\n");
+printf("Enter number of elements: ");
+scanf("%d",&n);
+srand((unsigned) time(&t));
+for(i=0;i<n;i++)
+{
+a[i]=rand() % 1000;
 }
-
+start=clock();
+insertion_sort(a,n);
+end=clock();
+printf("\nSorted randomly generated elements are: ");
+for(i=0;i<n;i++)
+{
+printf("%d ",a[i]);
+}
+time_taken=(double)(end-start)/CLOCKS_PER_SEC;printf("\nTime taken by insertion sort for random unsorted array: %lf",time_taken);
+for(i=0;i<n;i++)
+{
+a[i]=i+1;
+}start=clock();
+insertion_sort(a,n);
+end=clock();
+printf("\n\nSorted elements are: ");
+for(i=0;i<n;i++)
+{
+printf("%d ",a[i]);
+}
+time_taken=(double)(end-start)/CLOCKS_PER_SEC;
+printf("\nTime taken by insertion sort for sorted array: %lf",time_taken);
+}
+void insertion_sort(int a[],int n)
+{
+int i,j,temp;
+for(i=1;i<n;i++)
+{
+temp=a[i];
+j=i-1;
+while(j>=0 && a[j]>temp)
+{
+a[j+1]=a[j];
+j--;
+}
+a[j+1]=temp;
+}
+}
 ````
 #### 4. Merge Sort
-```` java copy
-public static int[] mergeSort(int[] arr) {
-    if (arr.length < 2) {
-        return arr;
-    }
-    int mid = arr.length / 2;
-    int[] left = Arrays.copyOfRange(arr, 0, mid);
-    int[] right = Arrays.copyOfRange(arr, mid, arr.length);
-    return merge(mergeSort(left), mergeSort(right));
+```` copy
+#include<stdio.h>
+#include<time.h>
+int a[10000], b[10000];
+void merge (int a[], int lb, int mid, int ub)
+{
+int i, j, k;
+i = lb;
+j = mid + 1;
+k = lb;
+while (i <= mid && j <= ub){
+if (a[i] <= a[j]){
+b[k] = a[i];
+i++;
+k++;
+}else{
+b[k] = a[j];
+j++;
+k++;
 }
-
-private static int[] merge(int[] left, int[] right) {
-    int[] result = new int[left.length + right.length];
-    int i = 0;
-    int j = 0;
-    int k = 0;
-    while (i < left.length && j < right.length) {
-        if (left[i] <= right[j]) {
-            result[k] = left[i];
-            i++;
-        } else {
-            result[k] = right[j];
-            j++;
-        }
-        k++;
-    }
-    while (i < left.length) {
-        result[k] = left[i];
-        i++;
-        k++;
-    }
-    while (j < right.length) {
-        result[k] = right[j];
-        j++;
-        k++;
-    }
-    return result;
+}
+if (i
+> mid){
+while (j <= ub){
+b[k]
+= a[j];
+j++;
+k++;
+}
+}else{
+while (i <= mid){
+b[k]
+= a[i];
+i++;
+k++;
+}}
+for (i
+= lb;
+i <= ub; i++){
+a[i]
+= b[i];
+}
+}
+void merge_sort (int a[], int lb, int ub){
+int mid;
+if (lb
+< ub)
+{
+mid
+= (lb
++ ub)
+/ 2;
+merge_sort (a, lb, mid);
+merge_sort (a, mid
++ 1, ub);
+merge (a, lb, mid, ub);
+}
+}
+void main (){
+int n, i, j;
+time_t t;
+double time_taken;
+clock_t start, end;
+printf ("Manthan Mehta: 21012021048\n");
+printf ("Enter number of elements: ");
+scanf ("%d", &n);
+srand ((unsigned) time (&t));
+for (i
+= 0;
+i
+< n; i++){
+a[i]
+= rand ()
+% 1000;
+}
+start
+= clock ();
+merge_sort (a, 0,
+n
+- 1);
+end
+= clock ();
+printf ("\nSorted randomly generated elements are: ");
+for (i
+= 0;
+i
+< n; i++){
+printf ("%d ", a[i]);
+}
+time_taken = (double) (end - start) / CLOCKS_PER_SEC;
+printf ("\nTime taken by merge sort for random unsorted array: %lf",time_taken);
+for (i = 0; i < n; i++){
+a[i] = i + 1;
+}
+start = clock ();
+merge_sort (a, 0, n - 1);
+end = clock ();
+printf ("\n\nSorted elements are: ");
+for (i = 0; i < n; i++){
+printf ("%d ", a[i]);
+}
+time_taken = (double) (end - start) / CLOCKS_PER_SEC;
+printf ("\nTime taken by merge sort for sorted array: %lf", time_taken);
 }
 
 ````
 #### 5. Quick Sort
-````java copy
-public static void quickSort(int[] arr, int low, int high) {
-    if (low < high) {
-        int pivotIndex = partition(arr, low, high);
-        quickSort(arr, low, pivotIndex);
-        quickSort(arr, pivotIndex + 1, high);
-    }
+```` copy
+#include<stdio.h>
+#include<time.h>
+void quick_sort (int a[], int p, int q) {
+if(p==q){
+return a;
+}else{
+if(p<q){
+int m=partition(a,p,q);
+quick_sort(a,p,m-1);
+quick_sort(a,m+1,q);
+}
+}
+}
+int partition(int a[],int p,int q){
+int i,j,x;
+x=a[p];
+i=p;
+for(j=p+1;j<=q;j++){
+if(a[j]<=x){
+i++;
+int temp=a[i];
+a[i]=a[j];
+a[j]=temp;
+}
+}
+int t=a[i];
+a[i]=a[p];
+a[p]=t;
+return i;
+}
+int main () {
+int a[10000], i, n;
+time_t t;
+double time_taken;
+clock_t start, end;
+printf ("Manthan Mehta: 21012021048\n");
+printf ("Enter number of elements: ");
+scanf ("%d", &n);
+srand ((unsigned) time (&t));
+for (i = 0; i < n; i++){
+a[i] = rand () % 1000;
+}
+start = clock ();
+quick_sort (a, 0, n - 1);
+end = clock ();
+printf ("\nSorted randomly generated elements are: ");
+for (i = 0; i < n; i++){
+printf ("%d ", a[i]);
+}
+time_taken = (double) (end - start) / CLOCKS_PER_SEC;
+printf ("\nTime taken by quick sort for random unsorted array: %lf",time_taken);
+for (i = 0; i < n; i++){
+a[i] = i + 1;
+}
+start = clock ();
+quick_sort (a, 0, n - 1);
+end = clock ();
+printf ("\n\nSorted elements are: ");
+for(i=0;i<n;i++){
+printf("%d ",a[i]);
+}
+time_taken=(double)(end-start)/CLOCKS_PER_SEC;
+printf("\nTime taken by quick sort for sorted array: %lf",time_taken);
+return 0;
 }
 
-private static int partition(int[] arr, int low, int high) {
-    int pivot = arr[low];
-    int i = low - 1;
-    int j = high + 1;
-    while (true) {
-        do {
-            i++;
-        } while (arr[i] < pivot);
-        do {
-            j--;
-        } while (arr[j] > pivot);
-        if (i >= j) {
-            return j;
-        }
-        int temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
-    }
-}
 ````
 ![comop](https://sem4.vercel.app/images/comp-3.png)
 
