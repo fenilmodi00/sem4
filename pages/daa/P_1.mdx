@@ -39,7 +39,7 @@ public static int sumUsingRecursion(int N) {
 ### 2 Implement functions to print nth Fibonacci number using iteration and recursive method. Compare the performance of two methods by counting number of steps executed on various inputs. Also draw a comparative chart. (Fibonacci series 1, 1, 2, 3, 5, 8….. Here 8 is the 6th Fibonacci number)
 
 #### 1 Iteration Method
-```` copy 
+```java copy 
 #include <stdio.h>
 void loop_fibo(int);
 int rec_fibo(int);
@@ -87,7 +87,7 @@ return (rec_fibo(n - 1) + rec_fibo(n - 2));
 }
 
 
-````
+```
 #### 2 Recursive Method 
 ````java copy
 public static int fibonacciRecursive(int n) {
@@ -105,7 +105,7 @@ public static int fibonacciRecursive(int n) {
 ### 3 Write user defined functions for the following sorting methods and compare their performance by time measurement with random data and Sorted data.
 
 #### 1. Selection Sort
-``` copy
+```java copy
 #include<stdio.h>
 #include<time.h>
 void selection_sort(int[],int);
@@ -160,7 +160,7 @@ a[min]=temp;
 }
 ```
 #### 2. Bubble Sort
-```` copy
+```java copy
 #include<stdio.h>
 #include<time.h>
 void bubble_sort(int [],int);
@@ -225,9 +225,9 @@ break;
 }
 }
 
-````
+```
 #### 3. Insertion Sort
-```` copy
+```java copy
 #include<stdio.h>
 #include<time.h>
 void insertion_sort(int [],int);
@@ -283,9 +283,9 @@ j--;
 a[j+1]=temp;
 }
 }
-````
+```
 #### 4. Merge Sort
-```` copy
+```java copy
 #include<stdio.h>
 #include<time.h>
 int a[10000], b[10000];
@@ -390,9 +390,9 @@ time_taken = (double) (end - start) / CLOCKS_PER_SEC;
 printf ("\nTime taken by merge sort for sorted array: %lf", time_taken);
 }
 
-````
+```
 #### 5. Quick Sort
-```` copy
+```java copy
 #include<stdio.h>
 #include<time.h>
 void quick_sort (int a[], int p, int q) {
@@ -459,7 +459,7 @@ printf("\nTime taken by quick sort for sorted array: %lf",time_taken);
 return 0;
 }
 
-````
+```
 ![comop](https://sem4.vercel.app/images/comp-3.png)
 
 ### 5 Implement a function of sequential search and count the steps executed by function on various inputs for best case and worst case. Also write complexity in each case and draw a comparative chart.
