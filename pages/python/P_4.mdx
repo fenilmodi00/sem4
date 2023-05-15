@@ -1,0 +1,144 @@
+# Practical_3 😶‍🌫️
+
+### 1.	Explain difference between insert, append and extend operations on list. Write a program to create and initialize list with your name, enrollment number, age, branch and result. Perform insert, remove, update, append and extend operation on list.
+
+```py copy
+l1=["Dhruv",20012011055,19,"CE",8.45]
+print(l1)
+l1.insert(2,"lakhnai")
+print("After insert value at index 2:-",l1)
+print(l1)
+print( )
+l1.remove("CE")
+print("After remove CE from list:-",l1)
+print(l1)
+print( )
+l1.append("Kherva")
+print("After append Kherva in list",l1)
+print(l1)
+print( )
+l1.extend(["GANPAT UNI",1110,"UVPCE"])
+print("After add a sublist in list",l1)
+print(l1)
+```
+### 2.	Write a program to search an element, find maximum & minimum value from the list. 
+```py copy
+l1=[918,265,323,402,588,666,723]
+print(l1)
+n=int(input("Enter the number to find:-"))
+print("Given elements is present at index:",l1.index(n))
+print("Maximum element present in list:",max(l1))
+print("Minimum element present in list:",min(l1))
+
+```
+#### 2. Using for loop
+```py copy
+l1 = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+print(l1)
+n = int(input("Enter number for FIND :"))
+count= -1
+temp = 0
+for x in l1:
+    count += 1
+    if x == n:
+         temp = 1
+         print(x)
+         break
+if temp==1:
+    print("Given element is present at index:-",count)
+else:
+    print("Entered element is not in list")
+maxno = l1[0]
+minno = l1[0]
+for x in l1:
+    if x > maxno:
+         maxno = x
+for x in l1:
+    if x < minno:
+         minno = x
+print("MAX element in list is {}".format(maxno))
+print("MIN element in list is {}".format(minno))
+
+```
+
+### 3.	Create a program that asks the user for a number and then prints out a list of all the divisors of that number. 
+```py copy
+n = int(input("Enter number :-"))
+l1 = []
+temp = 1
+while temp <= n:
+    if n % temp == 0:
+        l1.append(temp)
+    temp += 1
+print("Divisors of numbers are:-")
+print(l1)
+
+```
+
+### 4.WAP to sort element in list 
+```py copy
+l1 = [41,22,15,83,10,74,66]
+l1.sort()
+print("After sort:-",l1)
+
+```
+
+### 5.	Take two lists, say for example these two: a = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89] b = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]  and write a program that returns a list that contains only the elements that are common between the lists (without duplicates). Make sure your program works on two lists of different sizes.
+```py copy
+a = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
+b = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+c = []
+for i in a:
+    if i in b and i not in c:
+        c.append(i)
+print(c)
+
+```
+
+### 6.	Write a Python program which takes a list and returns a list with the elements "Shifted left by one position" so [1, 2, 3] yields [2, 3, 1]. Example: [11, 12, 13] → [12, 13, 11]
+```py copy
+l1 = []
+n = int(input("How many Elements you want to Enter:"))
+for i in range(0, n):
+    l1.append(int(input("Enter index {} element :".format(i))))
+print("List Before Shifted")
+print(l1)
+temp = l1[0]
+for i in range(0, len(l1)-1):
+    l1[i] = l1[i+1]
+    l1[len(l1)-1] = temp
+print("List after Shifted")
+print(l1)
+
+```
+### 7.	Write a program which takes a comma separated string from user & store each string which separated by comma in list & display list.
+```py copy
+i=1
+list1=[]
+while i!=0:
+    str=input("Enter a String:-")
+    list1.append(str)
+    i=int(input("Press 0 for exit:-"))
+print(list1)
+
+```
+
+### 8.	Write a program to create and initialize the tuple. Also remove 3rd element from tuple.
+```py copy
+t= (5,7,8,9,6,4)
+print('tuple:-',t)
+t = t[:2]+t[3:]
+print("after removing 3rd element:-",t)
+
+```
+### 9.	Create a tuple with name courses and initialize it with JAVA, PHP, C#, Android. Insert two items HTML and Python at the 3rd position in tuple.
+```py copy  
+courses = ('JAVA', 'PHP', 'C#', 'Android')
+print("Tuple courses:")
+print(courses)
+x = ('HTML', 'Python')
+courses = courses[:2] + (x,) + courses[2:]
+print("Tuple after add elements at 3rd position:")
+print(courses)
+
+```

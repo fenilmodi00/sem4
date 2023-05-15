@@ -1,0 +1,135 @@
+# Practical_3 😶‍🌫️
+
+### 1 Write a program to check if number is Armstrong.
+```py copy
+num = int(input("Enter a number: "))
+originalNum = num
+rem = 0
+modulo = 0
+while num != 0:
+    modulo = num % 10 
+    rem = rem + pow(modulo, 3)
+    num = int(num / 10)
+if originalNum == rem:
+    print(f"{originalNum} is an armstrong number")
+else:
+    print(f"{originalNum} is not an armstrong number")
+```
+
+### 2 Write a program to check special number. (Number is equal to the sum of its divisors)
+
+```py copy
+num=int(input('Enter a number :'))
+sum=0
+for i in range(1,num):
+    if(num%i==0):
+        print("Divisor num is: {}".format(i))
+sum=sum+i
+if(sum==num):
+    print("{} number is a special number".format(num))
+else:
+    print("{} number is not a special number".format(num))
+```
+
+### 3.	Create a program that will print out words that start with 's' from the below given statement.
+```py copy
+st="Print only the words that start with s in this sentence"
+for i in st.split():
+    if i.startswith("s"): ##Logic :
+        if(i[0]=='s'):
+            print(i)
+
+```
+
+### 4.	Write a program to give output of entered number multiplication table.
+```py copy
+x=int(input("Enter val of x:-"))
+for i in range(1,11):
+    print(x,"x",i,"=",x*i)
+
+```
+
+### 5.	Write a program to find the sum of digit of an input number using while loop.
+```py copy
+num=int(input("Enter any number:-"))
+modul=0
+rem=0
+
+while num !=0:
+    modul=num%10
+    rem=modul+rem
+    num=int(num/10)
+
+print("Addition of Input number:-",rem)
+```
+
+### 6.	Go to String below and if the length of a word is even print "even!". st='I love doing python programming in spyder'
+```py copy
+st='I lovedoing python programming in spyder'
+a=len(st)
+print(a)
+if a%2==0:
+    print("String length is even")
+else:
+    print("String length is odd")
+```
+
+### 7.	Write a program to count number of digits, upper-case characters and lower-case characters from the string.
+```py copy
+data="Hello ... How are you? 123" #data=input("Enter string: ")
+upper=0
+lower=0
+special=0
+digit=0
+
+for i in data:
+    if(i>='A' and i<='Z'):
+        upper+=1
+    elif(i>='a' and i<='z'):
+        lower+=1
+    elif(i>='0' and i<='9'):
+        digit+=1
+    else:
+        special+=1
+print("Data=",data)
+print("Uppercase={}\nLowercase={}\nDigit={}\nSpecial={}".format(upper,lower,digit,special))
+
+```
+### 8.	Write a python program to check if a string is a palindrome or not.
+```py copy
+a=input("Enter any string:-")
+a==a[::-1]
+ans=a
+if ans:
+    print("Yes String Is Palindrome")
+else:
+    print("No String Is Palindrome")
+
+```
+
+### 9.	Write a python program to remove i th character from string.
+```py copy
+str1="Helloo"
+n=3
+str2=str1[0:n]+str1[n+1:]
+print("Original string:-",str1)
+print("After Remove 3rd index val:-",str2)
+
+```
+
+### 10.	Write a python program to check if the substring is present in a given string.
+
+```py copy
+def check(s1,s2):
+    if(s2.count(s1)>0):
+        print("Yes S1 is present in s2")
+    else:
+        print("No")
+
+s2 = "Be yourself; everyone else is already taken."
+s1 ="already"
+print("S2=",s2)
+print("S1=",s1)
+check(s1, s2)
+
+```

@@ -1,0 +1,80 @@
+# Practical_3 😶‍🌫️
+
+### 1.	Create and print a dictionary that contains keys a,b,c,d with their values 1,2,3 and 4 respectively using curly bracket syntax and ‘dict’ in built function. 
+```py copy
+d={"a":1,"b":2,"c":3,"d":4}
+print(d)
+print(type(d))
+```
+### 2.	Using above created dictionary perform following operations
+#### 1 Write a code to print out the value of a, d, and c. 
+```py copy
+d={"a":1,"b":2,"c":3,"d":4}
+print(d["a"],d["c"],d["d"])
+```
+#### 2 Calculate the sum of the value of a,b,c,d and print it.
+```py copy
+d={"a":1,"b":2,"c":3,"d":4}
+print(d["a"]+d["b"]+d["c"]+d["d"])
+
+```
+
+#### 3 Add a new key, value pair (e,5) to the dictionary and print dictionary.
+```py copy  
+d={"a":1,"b":2,"c":3,"d":4}
+d["e"]=5
+print(d)
+
+```
+
+### 3.	Filter the dictionary by removing all items with a value greater than  
+```py copy
+d={"a":1,"b":2,"c":3,"d":4,"e":5}
+l1=[]
+for x,y in d.items():
+    if(y>2):
+        l1.append(x)
+print(l1)
+
+for i in l1:
+    d.pop(i)
+print("After delete value is greater than 2:-",d)
+
+```
+### 4.	Print the names which contain the character 'a' from the dictionary containing 2 lists of male and female students given below.
+```py copy
+d={"male": ["Tom", "Charlie", "Harry", "Frank"],
+    "female":["Sarah", "Huda", "Samantha", "Emily", "Elizabeth"] }
+for i in d.values():
+    for a in i:
+        if "a" in a:
+            print(a)
+
+```
+
+### 5.	You have 4 films in the dictionary with the age and number of seats available as indicated below. Write a programme to ask for a film and check for the person that he is eligible to watch movie, also check ticket availability and movie availability in the cinema. 
+```py copy
+d={"War": [3,5],
+        "Bourne": [18,5],
+        "Gully boy": [15,5],
+        "Uri":[12, 5]
+}
+print(d)
+movie=input("Enter movie you like:-")
+
+if movie  not in d.keys():
+    print("Movie is not in Cinema")
+
+else:
+    age=int(input("Enter your Age:-"))
+    
+    if(age>=d[movie][0]):
+        seat=int(input("Enter how many seat:-"))
+        if(seat<=d[movie][1]):
+            print("Seat is available")
+        else:
+            print("Housefull")
+    else:
+        print("You are eligible for movie")
+
+```
