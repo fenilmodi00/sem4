@@ -2,120 +2,126 @@
 
 ### 1 Write a Python GUI program to create a simple calculator.
 ```py filename="P10_1.py" copy 
-from tkinter import * root = Tk()
-root.geometry("200x250")
-fn = Label(root, text = 'Enter Number: ',width = 15, height = 3)fn.place(x = 1,y =
-20)
-sn = Label(root, text = 'Enter Number: ',width = 15, height = 3)sn.place(x = 1,y =
-50)
-fnt = Entry(root,width = 14,fg = 'black',bg = 'white')fnt.place(x = 100,y
-= 37)
-snt = Entry(root,width = 14,fg = 'black',bg = 'white')snt.place(x = 100,y
-= 65)
-def plusf():
-global ans
-n = int(fnt.get())
-r = int(snt.get())ans = n+r
-lbl = Label(root, text='Answer is : ' + str(ans),bg = 'white',fg='black')
-lbl.place(x=60, y=200)def
-minus():
-n = int(fnt.get())
-r = int(snt.get())ans = n-r
-lbl = Label(root, text='Answer is : ' + str(ans),bg = 'white',fg='black')
-lbl.place(x=60, y=200)def
-mul():
-n = int(fnt.get())
-r = int(snt.get())ans = n*r
-lbl = Label(root, text='Answer is : ' + str(ans),bg = 'white',fg='black')
-lbl.place(x=60, y=200)def
-div():
-n = int(fnt.get())
-r = int(snt.get())ans = n/r
-lbl = Label(root, text='Answer is : ' + str(ans),bg = 'white',fg='black')
-lbl.place(x=60, y=200)
-plus = Button(root,width = 5,command = plusf,text = '+',fg = 'white',bg ='black', font=('times',
-11, ' bold '))
-plus.place(x = 30,y = 105)
-minus = Button(root,width = 5,command = minus ,text = '-',fg = 'white',bg
-= 'black', font=('times', 11, ' bold '))minus.place(x =
-110,y = 105)
-mul = Button(root,width = 5,command = mul,text = '*',fg = 'white',bg ='black', font=('times',
-11, ' bold '))
-mul.place(x = 30,y = 155)
-div = Button(root,width = 5,command = div,text = '/',fg = 'white',bg ='black', font=('times',
-11, ' bold '))
-div.place(x = 110,y = 155)
-root.mainloop()
+from tkinter import*
+top = Tk()
+top.title("Hello world")
+top.geometry("400x300")
+l1 = Label(top,text="CALCULATOR")
+l2 = Label(top,text="Enter value 1")
+l3 = Label(top,text="Enter Value2")
+l4 = Label(top,text='Result : ')
+n1 = StringVar()
+n2 = StringVar()
+e1 = Entry(top,textvariable=n1)
+e2 = Entry(top,textvariable=n2)
+l1.place(x=10,y=20)
+l2.place(x=10,y=50)
+l3.place(x=10,y=80)
+l4.place(x=90,y=200)
+e1.place(x=80,y=50)
+e2.place(x=80,y=80)
+def add():
+num1 = (n1.get())
+num2 = (n2.get())
+result = int(num1)+int(num2)
+l4.config(text="Result = %d" % result)
+def sub():
+num1 = (n1.get())
+num2 = (n2.get())
+result = int(num1)-int(num2)
+l4.config(text="Result = %d" % result)
+def mul():
+num1 = (n1.get())
+num2 = (n2.get())
+result = int(num1)*int(num2)
+l4.config(text="Result = %d" % result)
+def div():
+num1 = (n1.get())
+num2 = (n2.get())
+result = int(num1)/int(num2)
+l4.config(text="Result = %d" % result)
+b1 = Button(top, text="+",command=add).place(x=110,y=120)
+b2 = Button(top, text="-",command=sub).place(x=110,y=160)
+b3 = Button(top, text="*",command=mul).place(x=140,y=120)
+b4 = Button(top, text="/",command=div).place(x=140,y=160)
+top.mainloop()
 
 ```
 
 ### 2 Make weight conversion GUI from kg to gram, pound and ounce using tkinter.
 ```py filename="P10_2.py" copy 
-from tkinter import * from
-tkinter import * top = Tk()
-top.geometry("500x100")def
-from_kg():
-gram = float(e2_value.get()) * 1000 pound =
-float(e2_value.get()) * 2.20462ounce =
-float(e2_value.get()) * 35.274 t1.delete("1.0",
-END)
-t1.insert(END, gram)
-t2.delete("1.0", END)
-t2.insert(END, pound)
-t3.delete("1.0", END)
-t3.insert(END, ounce)
-e1 = Label(top, text="Enter the weight in Kg",bg="Gray",fg="black")e2_value =
-StringVar()
-e2 = Entry(top, textvariable=e2_value,bg="Gray",fg="black")e3 =
-Label(top, text='Gram',bg="Gray",fg="black")
-e4 = Label(top, text='Pounds',bg="Gray",fg="black")e5 =
-Label(top, text='Ounce',bg="Gray",fg="black")
-t1 = Text(top, height=1, width=20,bg="Gray",fg="black") t2 =
-Text(top, height=1, width=20,bg="Gray",fg="black") t3 = Text(top,
-height=1, width=20,bg="Gray",fg="black")
-b1 = Button(top, text="Convert", bg="Gray",fg="black",command=from_kg)
-e1.grid(row=2, column=1)
-e2.grid(row=2, column=2)
-e3.grid(row=3, column=1)
-e4.grid(row=3, column=2)
-e5.grid(row=3, column=3)
-t1.grid(row=4, column=1)
-t2.grid(row=4, column=2)
-t3.grid(row=4, column=3)
-b1.grid(row=2, column=3)
+from cgitb import text
+from tkinter import *
+from turtle import width
+top=Tk()
+top.geometry("500x100")
+top.title("Weight Converter")
+l1=Label(top,text="21012021001_ADESHARA BRIJESH").grid(row=0,column=0)
+l2=Label(top,text="Enter the weight in Kg : ").grid(row=1,column=0)
+l3=Label(top,text="Gram").grid(row=2,column=0)
+l4=Label(top,text="Pounds").grid(row=2,column=1)
+l5=Label(top,text="Ounce").grid(row=2,column=2)
+n1=StringVar()
+e1=Entry(top,textvariable=n1)
+e1.grid(row=1,column=1)
+lb1=Text(top,height=1,width=20)
+lb1.grid(row=3,column=0)
+lb2=Text(top,height=1,width=20)
+lb2.grid(row=3,column=1)
+lb3=Text(top,height=1,width=20)
+lb3.grid(row=3,column=2)
+def ktg():
+gram =float(e1.get())*1000
+pound=float(e1.get())*2.20462
+ounce=float(e1.get())*35.274
+lb1.insert("1.0",gram)
+lb2.insert("1.0",pound)
+lb3.insert("1.0",ounce)
+b1=Button(top,text="Convert",command=ktg).grid(row=1,column=2)
 top.mainloop()
+
 ```
 
 ### 3 Write python GUI to make font menu.
 ```py filename="P10_3.py" copy 
-from tkinter import * top =
-Tk() top.geometry("600x400")
+from tkinter import *
+top =Tk()
+top.geometry("600x400")
+top.title("21012021001_ADESHARA BRIJESH")
 def font_change():
 f = Lfont.get(ACTIVE)
 l4.config(font=(f,))
 def font_style():
-fsize = fontsize.get(ANCHOR) fstyle =
-fontstyle.get(ACTIVE)
+fsize = fontsize.get(ANCHOR)
+fstyle = fontstyle.get(ACTIVE)
 l4.config(font=(' ', fsize, fstyle))
 def font_size():
 fsize = fontsize.get(ACTIVE)
 l4.config(font=('', fsize,))
-l1=Label(top,text="Font",font="bold,15") l1.place(x=50,y=10)
-l2=Label(top,text="FontSize",font="bold,15") l2.place(x=200,y=10)
-l3=Label(top,text="FontSize",font="bold,15") l3.place(x=400,y=10)
-Lfont=Listbox(top) Lfont.insert(0,'Times')
-Lfont.insert(1,'Verdana') Lfont.insert(2,'Arial')
-Lfont.insert(3,'Courier') Lfont.place(x=50,y=50)
+l1=Label(top,text="Font",font="bold,15")
+l1.place(x=50,y=10)
+l2=Label(top,text="FontSize",font="bold,15")
+l2.place(x=200,y=10)
+l3=Label(top,text="FontSize",font="bold,15")
+l3.place(x=400,y=10)
+Lfont=Listbox(top)
+Lfont.insert(0,'Times')
+Lfont.insert(1,'Verdana')
+Lfont.insert(2,'Arial')
+Lfont.insert(3,'Courier')
+Lfont.place(x=50,y=50)
 fontstyle=Listbox(top)
 fontstyle.insert(0,'regular')
 fontstyle.insert(1,'italic')
 fontstyle.insert(2,'bold')
 fontstyle.insert(3,'bold italic')
 fontstyle.place(x=200,y=50)
-fontsize=Listbox(top) for i in
-range(0,100):
-fontsize.insert(i,str(i+1)) fontsize.place(x=400,y=50)
-l4=Label(top,text='Simple') l4.place(x=220,y=300)
+fontsize=Listbox(top)
+for i in range(0,100):
+fontsize.insert(i,str(i+1))
+fontsize.place(x=400,y=50)
+l4=Label(top,text='Simple')
+l4.place(x=220,y=300)
 b1=Button(top,text='Font',font=('bold',12),command=font_change)
 b1.place(x=75,y=220)
 b2=Button(top,text='Font Style',font=('bold',12),command=font_style)
@@ -123,67 +129,66 @@ b2.place(x=220,y=220)
 b3=Button(top,text='Font Size',font=('bold',12),command=font_size)
 b3.place(x=420,y=220)
 top.mainloop()
-
 ```
 
 ### 4 Create a student registration page with enrollment, name, gender, address, branch name, mobile number and email address fields and store all data in the database.
 ```py filename="P10_4.py" copy 
+from tkinter import ttk
 from tkinter import *
-import sqlite3
-root = Tk()
-root.geometry('500x500')
-root.title("Registration Form")
-Fullname = StringVar()
-en = StringVar()
-var = IntVar()
-var1 = IntVar()
-Email = StringVar()
-mob = StringVar()
-branch = StringVar()
-def database():
- name1 = entry_1.get()
- enr = entry_2.get()
- gend = var.get()
- br = op.get()
- m = mob.get()
- e = Email.get()
-conn = sqlite3.connect('Form.db')
-with conn:cursor = conn.cursor()
-cursor.execute('CREATE TABLE IF NOT EXISTS Student (FullnameTEXT,Enrollment
-TEXT,Gender Text,Branch TEXT,MobileTEXT,EmailTEXT)')
-cursor.execute('INSERT INTO
-Student(FullName,Enrollment,Gender,Branch,Mobile,Email)VALUES(?,?,?,?,?,?) ',(name1,
-enr, gend,br,m,e))
+from unicodedata import name
+import pymysql
+top=Tk()
+top.geometry("400x300")
+top.title("Registration Page [ADESHARA BRIJESH]")
+l1=Label(top,text="Enter Enrollment number : ").grid(row=1,column=1)
+l2=Label(top,text="Enter Name : ").grid(row=2,column=1)
+l3=Label(top,text="Select Gender : ").grid(row=3,column=1)
+l4=Label(top,text="Enter Address : ").grid(row=4,column=1)
+l5=Label(top,text="Select Branch : ").grid(row=5,column=1)
+l6=Label(top,text="Enter Mobile : ").grid(row=6,column=1)
+l7=Label(top,text="Enter E-Mail : ").grid(row=7,column=1)
+n1=StringVar()
+n2=StringVar()
+n3=StringVar()
+n4=StringVar()
+n5=StringVar()
+e1=Entry(top,textvariable=n1).grid(row=1,column=2,columnspan=2)
+e2=Entry(top,textvariable=n2).grid(row=2,column=2,columnspan=2)
+e3=Entry(top,textvariable=n3).grid(row=4,column=2,columnspan=2)
+e4=Entry(top,textvariable=n4).grid(row=6,column=2,columnspan=2)
+e5=Entry(top,textvariable=n5).grid(row=7,column=2,columnspan=2)
+radio=StringVar(top,"Male")
+r1=Radiobutton(top,text="Male",variable=radio,value='Male').grid(row=3,column=2)
+r2=Radiobutton(top,text="Female",variable=radio,value='Female').grid(row=3,column
+=3)
+branch = ["--Select Branch--","I.T.","C.E.","A.I.","Cyber Security"]
+cb=ttk.Combobox(top,values=branch)
+cb.current(0)
+cb.grid(row=5,column=2,columnspan=2)
+def save():
+enroll1=int(n1.get())
+nam=n2.get()
+gen=radio.get()
+add=n3.get()
+br=cb.get()
+m=int(n4.get())
+em=n5.get()
+print(enroll1, nam, gen, add, br, m, em)
+print(type(enroll1), type(nam), type(gen), type(add), type(br),type(m), type(em))
+try:
+conn=pymysql.connect(host="localhost",user="root",password="",database="demo
+_data")
+Cursor=conn.cursor()
+q1="Create table student_data(Enrollment_no int,Name varchar(20),Gender
+varchar(20),Address varchar(20),Branch varchar(20),Mobile_no int,E_mail
+varchar(20))"
+qry="insert into student_data values(%d,'%s','%s','%s','%s',%d,'%s')"
+Cursor.execute(q1)
+Cursor.execute(qry %(enroll1,nam,gen,add,br,m,em))
 conn.commit()
-label_0 = Label(root, text="Registration form", width=20,font=("bold", 20)).place(x=90, y=53)
-label_1 = Label(root, text="FullName", width=20, font=("bold",10)).place(x=80, y=130)
-entry_1 = Entry(root,text=Fullname)
-entry_1.place(x=240, y=130)
-label_2 = Label(root, text="Enrolment", width=20, font=("bold",10))
-label_2.place(x=68, y=180)
-entry_2 = Entry(root, text=en)
-entry_2.place(x=240, y=180)
-label_3 = Label(root, text="Gender", width=20, font=("bold",10))
-label_3.place(x=70, y=230)
-Radiobutton(root, text="Male", padx=5, variable=var,value=1).place(x=235, y=230)
-Radiobutton(root, text="Female", padx=20, variable=var,value=2).place(x=290, y=230)
-label_4 = Label(root, text="Branch", width=20, font=("bold",10))
-label_4.place(x=70, y=280)
-op = ['--Select Branch--','Information Technology','ComputerEngineering']
-branch.set(op[0])
-w = OptionMenu(root, branch, *op)
-w.place(x = 240,y = 280)
-label_5 = Label(root, text="Mobile", width=20, font=("bold",10))
-label_5.place(x=70, y=330)
-PPY Practical-10
-Name:-Dhruv.s.lakhani Enno.No.:-20012011055
-entry_3 = Entry(root, textvar=mob)
-entry_3.place(x=240, y=330)
-label_6 = Label(root, text="Email", width=20, font=("bold", 10))
-label_6.place(x=70, y=380)
-entry_4 = Entry(root, textvar=Email)
-entry_4.place(x=240, y=380)
-Button(root,text='Submit',width=20,bg='brown',fg='white',command=database).place(x=180,
-y=430)
-root.mainloop()
+except pymysql.DatabaseError as e:
+print("Error: ",e)
+print("Table created sucessfully.")
+b1=Button(top,text="Submit",command=save).grid(row=8,column=2)
+top.mainloop()
 ```
