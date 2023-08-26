@@ -3,36 +3,48 @@
 ### 1 Write a program to get integer, double, character and string values from the user and display it on the screen.
 
 ```c# filename="P2_1.C#"   copy
-using System;
+// Parse command-line arguments
+const args = process.argv.slice(2);
 
-namespace P1_1
-{   internal class Program
-    {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("21012021052");
-            int A;
-            double B;
-            char c;
-            string d;
-
-            Console.WriteLine("enter A value in intger");
-            A = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("enter A value in double");
-            B = Convert.ToDouble(Console.ReadLine());
-            Console.WriteLine("enter c value in charecter");
-            c = Convert.ToChar(Console.ReadLine());
-            Console.WriteLine("enter d value in string");
-            d = Convert.ToString(Console.ReadLine());
-
-            Console.WriteLine(A);
-            Console.WriteLine(B);
-            Console.WriteLine(c);
-            Console.WriteLine(d);
-            Console.ReadKey();
-        }
-    }
+if (args.length != 3) {
+    console.log("Please provide 3 arguments: <number1> <operator> <number2>");
+    process.exit(1);
 }
+
+
+let num1 = parseFloat(args[0]);
+let operator = args[1];
+let num2 = parseFloat(args[2]);
+
+if (isNaN(num1) || isNaN(num2)) {
+    console.log("Invalid numbers provided. Please ensure you input numbers.");
+    process.exit(1);
+}
+
+// Perform the desired operation
+switch (operator) {
+    case '+':
+        console.log("Result: ", num1 + num2);
+        break;
+    case '-':
+        console.log("Result: ", num1 - num2);
+        break;
+    case '*':
+        console.log("Result: ", num1 * num2);
+        break;
+    case '/':
+        if (num2 == 0) {
+            console.log("Error: Division by zero is not allowed.");
+            process.exit(1);
+        } else {
+            console.log("Result: ", num1 / num2);
+        }
+        break;
+    default:
+        console.log("Invalid operator. Please use one of +, -, *, /");
+        process.exit(1);
+}
+
 ```
 
 ### 2 Write a program to check whether the entered value is numeric or not. [Note: use try and catch.]
